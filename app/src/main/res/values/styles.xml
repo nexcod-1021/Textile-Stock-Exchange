@@ -15,7 +15,7 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
-    <style name="style_edittext" >
+    <style name="style_edittext">
         <item name="android:layout_marginTop">15dp</item>
         <item name="android:inputType">text</item>
         <item name="android:singleLine">true</item>
@@ -54,7 +54,21 @@
         <item name="android:layout_marginRight">7dp</item>
         <item name="android:maxLength">1</item>
         <item name="android:gravity">center</item>
+        <item name="android:fontFamily">@font/bold</item>
     </style>
+
+    <style name="style_spinner">
+        <item name="android:padding">15dp</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/colorblack</item>
+        <item name="android:textColorHint">@color/coloredittext</item>
+        <item name="android:gravity">start</item>
+
+        <item name="android:fontFamily">@font/regular</item>
+
+
+    </style>
+
 
 
 

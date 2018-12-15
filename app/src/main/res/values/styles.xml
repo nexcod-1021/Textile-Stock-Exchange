@@ -1,7 +1,7 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppTheme" parent="Base.Theme.AppCompat.Light.DarkActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
@@ -17,12 +17,10 @@
 
     <style name="style_edittext" >
         <item name="android:layout_marginTop">15dp</item>
-
+        <item name="android:inputType">text</item>
         <item name="android:singleLine">true</item>
-        <item name="android:paddingTop">10dp</item>
-        <item name="android:paddingLeft">10dp</item>
-        <item name="android:paddingRight">10dp</item>
-        <item name="android:paddingBottom">20dp</item>
+        <item name="android:paddingTop">15dp</item>
+        <item name="android:paddingBottom">15dp</item>
         <item name="android:textSize">16sp</item>
         <item name="android:textColor">@color/colorblack</item>
         <item name="android:focusable">true</item>
@@ -46,6 +44,7 @@
 
 
     <style name="styple_edittext_box">
+
         <item name="android:singleLine">true</item>
         <item name="android:background">@drawable/otp_generate_box</item>
         <item name="android:textSize">16sp</item>
@@ -55,9 +54,6 @@
         <item name="android:layout_marginRight">7dp</item>
         <item name="android:maxLength">1</item>
         <item name="android:gravity">center</item>
-
-
-
     </style>
 
 

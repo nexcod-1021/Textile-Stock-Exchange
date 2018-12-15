@@ -26,18 +26,12 @@
         <activity
             android:name=".Activity.VerifyOTPActivity"
             android:theme="@style/no_actionbar"
-            android:windowSoftInputMode="stateAlwaysHidden|adjustResize"></activity>
-        <activity
-            android:name=".Activity.RegistrationForm1"
-            android:label="Registration"
-            android:parentActivityName=".Activity.VerifyOTPActivity"
             android:windowSoftInputMode="stateAlwaysHidden|adjustResize">
 
         </activity>
-        <activity
-            android:name=".Activity.RegistrationForm2"
+        <activity android:name=".Activity.RegistrationForm1"
+            android:parentActivityName=".Activity.VerifyOTPActivity"
             android:label="Registration"
-            android:parentActivityName=".Activity.RegistrationForm1"
             android:windowSoftInputMode="stateAlwaysHidden|adjustResize">
 
         </activity>

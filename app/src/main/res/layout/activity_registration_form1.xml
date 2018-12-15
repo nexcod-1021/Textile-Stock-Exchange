@@ -211,7 +211,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="10dp"
-            android:src="@mipmap/nextbutton" />
+            android:src="@mipmap/nextbutton"
+            android:onClick="MoveRegistrationform2"/>
     </LinearLayout>
 
 

@@ -139,7 +139,6 @@
 
             <Spinner
                 android:id="@+id/spRegistrationMeters"
-
                 style="@style/style_spinner"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -168,6 +167,7 @@
             <TextView
                 style="@style/style_edittext"
                 android:layout_width="0dp"
+                android:paddingLeft="5dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="0dp"
                 android:layout_weight="1"
@@ -213,8 +213,6 @@
             android:layout_height="wrap_content"
             android:layout_margin="40dp"
             android:onClick="movelogin"
-            android:text="submit"
-
-            />
+            android:text="submit" />
     </LinearLayout>
 </ScrollView>

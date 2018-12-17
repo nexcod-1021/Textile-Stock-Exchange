@@ -44,7 +44,8 @@
             android:theme="@style/no_actionbar"
             android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
         <activity android:name=".Activity.ForgotPasswordActivity" />
-
+        <activity android:name=".Activity.EditProfileActivity"
+            android:windowSoftInputMode="stateAlwaysHidden"/>
         <activity
             android:name=".Activity.HomeActivity"
             android:theme="@style/AppTheme.NoActionBar"

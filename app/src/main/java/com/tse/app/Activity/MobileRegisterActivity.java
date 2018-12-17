@@ -22,6 +22,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.tse.app.Config;
+import com.tse.app.EditProfileActivity;
 import com.tse.app.R;
 
 import org.json.JSONArray;
@@ -45,6 +46,8 @@ public class MobileRegisterActivity extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_mobile_register);
         findViewByIdS();
+
+        startActivity(new Intent(getApplicationContext(), HomeActivity.class));
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(MobileRegisterActivity.this);
         editor = sharedPreferences.edit();
 
@@ -52,7 +55,6 @@ public class MobileRegisterActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 new CheckExistMobile().execute();
-
 
             }
         });

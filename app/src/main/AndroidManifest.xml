@@ -2,7 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.tse.app">
-    <uses-permission android:name="android.permission.INTERNET"/>
+
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -27,23 +28,27 @@
         <activity
             android:name=".Activity.VerifyOTPActivity"
             android:theme="@style/no_actionbar"
-            android:windowSoftInputMode="stateAlwaysHidden|adjustResize"/>
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
         <activity
             android:name=".Activity.RegistrationForm1"
             android:label="Registration"
             android:parentActivityName=".Activity.VerifyOTPActivity"
-            android:windowSoftInputMode="stateAlwaysHidden"/>
+            android:windowSoftInputMode="stateAlwaysHidden" />
         <activity
             android:name=".Activity.RegistrationForm2"
             android:label="Registration"
             android:parentActivityName=".Activity.RegistrationForm1"
-            android:windowSoftInputMode="stateAlwaysHidden"/>
+            android:windowSoftInputMode="stateAlwaysHidden" />
         <activity
             android:name=".Activity.LoginActivity"
             android:theme="@style/no_actionbar"
-            android:windowSoftInputMode="stateAlwaysHidden|adjustResize"/>
-
-        <activity android:name=".Activity.ForgotPasswordActivity"/>
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
+        <activity android:name=".Activity.ForgotPasswordActivity" />
+        <activity android:name=".EditProfileActivity"/>
+        <activity
+            android:name=".Activity.HomeActivity"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="stateAlwaysHidden" />
     </application>
 
 </manifest>

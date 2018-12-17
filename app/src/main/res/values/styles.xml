@@ -30,7 +30,6 @@
     </style>
 
     <style name="style_button">
-
         <item name="android:layout_marginTop">25dp</item>
         <item name="android:singleLine">true</item>
         <item name="android:padding">10dp</item>
@@ -38,8 +37,6 @@
         <item name="android:textSize">16sp</item>
         <item name="android:textColor">@color/colorwhite</item>
         <item name="android:fontFamily">@font/bold</item>
-
-
     </style>
 
 

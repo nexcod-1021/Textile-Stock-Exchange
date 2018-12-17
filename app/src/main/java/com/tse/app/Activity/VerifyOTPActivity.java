@@ -11,6 +11,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.tse.app.R;
 
@@ -24,6 +25,7 @@ public class VerifyOTPActivity extends AppCompatActivity {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_verify_otp);
         findViewBy_Id();
+        Toast.makeText(this,""+getIntent().getExtras().getString("mobile"), Toast.LENGTH_SHORT).show();
         OptNumber1.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {

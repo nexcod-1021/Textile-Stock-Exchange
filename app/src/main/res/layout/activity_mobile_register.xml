@@ -29,7 +29,7 @@
             android:layout_height="wrap_content"
             android:hint="Mobile Number"
             android:inputType="number"
-            />
+            android:maxLength="10" />
 
 
         <Button
@@ -40,8 +40,7 @@
             android:layout_margin="40dp"
             android:onClick="submit"
             android:text="submit"
-
-          />
+            />
     </LinearLayout>
 
 </LinearLayout>

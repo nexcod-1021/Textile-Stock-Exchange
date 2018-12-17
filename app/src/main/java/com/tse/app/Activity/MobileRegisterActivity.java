@@ -85,7 +85,6 @@ public class MobileRegisterActivity extends AppCompatActivity {
                                 System.out.println("Exist mobile :" + response);
                                 if (j.getString("STATUS").equalsIgnoreCase("true")) {
 
-
                                     Intent intent  = new Intent(getApplicationContext(),VerifyOTPActivity.class);
                                     intent.putExtra("mobile", String.valueOf(j.getJSONArray(Config.response)));
                                     startActivity(intent);

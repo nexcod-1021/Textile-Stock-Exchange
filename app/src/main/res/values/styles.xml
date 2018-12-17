@@ -25,7 +25,6 @@
         <item name="android:textColor">@color/colorblack</item>
         <item name="android:focusable">true</item>
         <item name="android:textColorHint">@color/coloredittext</item>
-        <item name="android:backgroundTint" tools:ignore="NewApi">@color/colorsigleline</item>
         <item name="android:fontFamily">@font/regular</item>
     </style>
 

@@ -16,4 +16,24 @@
         <item>General</item>
         <item>Prime</item>
     </string-array>
+    <string name="title_activity_manu_dashbord">ManuDashbordActivity</string>
+    <string name="title_section1">Section 1</string>
+    <string name="title_section2">Section 2</string>
+    <string name="title_section3">Section 3</string>
+
+
+    <string name="action_example">Example action</string>
+
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_home">HomeActivity</string>
+    <string name="title_activity_main">MainActivity</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="about_as">If you want Excel to treat certain types of numbers as text, you can use the text format instead of a number format. For example, If you are using credit card numbers, or other number codes that contain 16 digits or more, you must use a text format. That’s because Excel has a maximum of 15 digits of precision and will round any numbers that follow the 15th digit down to zero, which probably isn’t what you want to happen.
+
+It’s easy to tell at a glance if a number is formatted as text, because it will be left-aligned instead of right-aligned in the cell.
+    If you want Excel to treat certain types of numbers as text, you can use the text format instead of a number format. For example, If you are using credit card numbers, or other number codes that contain 16 digits or more, you must use a text format. That’s because Excel has a maximum of 15 digits of precision and will round any numbers that follow the 15th digit down to zero, which probably isn’t what you want to happen.
+
+It’s easy to tell at a glance if a number is formatted as text, because it will be left-aligned instead of right-aligned in the cell</string>
 </resources>

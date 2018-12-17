@@ -3,7 +3,6 @@ package com.tse.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
@@ -22,10 +21,8 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.tse.app.Config;
-import com.tse.app.EditProfileActivity;
 import com.tse.app.R;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -47,7 +44,7 @@ public class MobileRegisterActivity extends AppCompatActivity {
         setContentView(R.layout.activity_mobile_register);
         findViewByIdS();
 
-        startActivity(new Intent(getApplicationContext(), HomeActivity.class));
+        startActivity(new Intent(getApplicationContext(), EditProfileActivity.class));
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(MobileRegisterActivity.this);
         editor = sharedPreferences.edit();
 
@@ -58,7 +55,6 @@ public class MobileRegisterActivity extends AppCompatActivity {
 
             }
         });
-
     }
 
     private void findViewByIdS() {
@@ -84,11 +80,10 @@ public class MobileRegisterActivity extends AppCompatActivity {
                         public void onResponse(String response) {
                             try {
                                 JSONObject j = new JSONObject(response.trim());
-                                System.out.println("Exist mobile :" + response);
+                                System.out.println("Exist mobile :" + response.trim());
                                 if (j.getString("STATUS").equalsIgnoreCase("true")) {
-
                                     Intent intent  = new Intent(getApplicationContext(),VerifyOTPActivity.class);
-                                    intent.putExtra("mobile", String.valueOf(j.getJSONArray(Config.response)));
+                                    intent.putExtra("mobile", String.valueOf(j.getString(Config.response)));
                                     startActivity(intent);
                                     pg.dismiss();
                                 } else {
@@ -110,7 +105,7 @@ public class MobileRegisterActivity extends AppCompatActivity {
                 @Override
                 protected Map<String, String> getParams() {
                     Map<String, String> map = new HashMap<String, String>();
-                    map.put("email", edMobileNumber.getText().toString());
+                    map.put("phone", edMobileNumber.getText().toString());
                     System.out.println("Exist mobile " + map);
                     return map;
                 }

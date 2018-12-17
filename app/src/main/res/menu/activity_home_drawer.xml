@@ -3,9 +3,36 @@
 
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/nav_home"
+            android:id="@+id/nav_Home"
             android:icon="@mipmap/home_ic"
             android:title="Home" />
+        <item
+            android:id="@+id/nav_Trade_History"
+            android:icon="@mipmap/trad_history_ic"
+            android:title="Trade History" />
+        <item
+            android:id="@+id/nav_Contact_Us"
+            android:icon="@mipmap/contactus_ic"
+            android:title="Contact Us" />
+        <item
+            android:id="@+id/nav_About_Us"
+            android:icon="@mipmap/aboutus_ic"
+            android:title="About Us" />
+        <item
+            android:id="@+id/nav_Notification"
+            android:icon="@mipmap/aboutus_ic"
+            android:title="Notification" />
+        <item
+            android:id="@+id/nav_FAQ"
+            android:icon="@mipmap/faq_ic"
+            android:title="FAQ" />
+        <item
+            android:id="@+id/nav_Logout"
+            android:icon="@mipmap/logout_ic"
+            android:title="Logout" />
+
+
+
 
 
     </group>

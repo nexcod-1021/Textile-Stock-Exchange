@@ -44,7 +44,6 @@
 
 
     <style name="styple_edittext_box">
-
         <item name="android:singleLine">true</item>
         <item name="android:background">@drawable/otp_generate_box</item>
         <item name="android:textSize">16sp</item>
@@ -63,12 +62,14 @@
         <item name="android:textColor">@color/colorblack</item>
         <item name="android:textColorHint">@color/coloredittext</item>
         <item name="android:gravity">start</item>
-
         <item name="android:fontFamily">@font/regular</item>
-
-
     </style>
 
+    <style name="style_textview">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/colorblack</item>
+        <item name="android:fontFamily">@font/regular</item>
+    </style>
 
 
 

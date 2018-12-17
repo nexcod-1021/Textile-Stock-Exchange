@@ -95,11 +95,11 @@
 
         <Spinner
             android:id="@+id/generalSpinner"
+            style="@style/style_spinner"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="0dp"
-            style="@style/style_spinner"
-            android:entries="@array/select_category"/>
+            android:entries="@array/select_category" />
 
         <EditText
             style="@style/style_edittext"
@@ -122,13 +122,12 @@
                 android:hint="Quantity" />
 
             <Spinner
+                style="@style/style_spinner"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
                 android:layout_marginTop="0dp"
-                android:entries="@array/Meters"
-                style="@style/style_spinner"/>
-
+                android:layout_weight="1"
+                android:entries="@array/Meters" />
 
         </LinearLayout>
 
@@ -141,9 +140,9 @@
 
 
         <LinearLayout
-            android:gravity="center"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:gravity="center"
             android:orientation="horizontal">
 
             <TextView
@@ -154,35 +153,38 @@
                 android:layout_weight="1"
                 android:fontFamily="@font/regular"
                 android:hint="Membership" />
+
             <RadioGroup
                 android:layout_width="0dp"
+                android:layout_height="wrap_content"
                 android:layout_weight="2"
-                android:orientation="horizontal"
-                android:layout_height="wrap_content">
+                android:orientation="horizontal">
 
-            <RadioButton
-                android:checked="true"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="0dp"
-                android:layout_weight="1"
-                android:hint="General"
-                android:fontFamily="@font/regular"
-                android:buttonTint="@color/colorPrimary"
-                android:padding="10dp"/>
-            <RadioButton
-                android:checked="false"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="0dp"
-                android:layout_weight="1"
-                android:fontFamily="@font/regular"
-                android:hint="prime"
-                android:buttonTint="@color/colorPrimary"
-                android:padding="10dp"/>
+                <RadioButton
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:buttonTint="@color/colorPrimary"
+                    android:checked="true"
+                    android:fontFamily="@font/semibold"
+                    android:text="General"
+                    android:textSize="16dp"
+                    android:padding="10dp" />
+
+                <RadioButton
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textSize="16dp"
+                    android:buttonTint="@color/colorPrimary"
+                    android:checked="false"
+                    android:fontFamily="@font/semibold"
+                    android:text="Prime"
+                    android:padding="10dp" />
 
             </RadioGroup>
         </LinearLayout>
+
         <Button
             android:id="@+id/btnMobileRegister"
             style="@style/style_button"

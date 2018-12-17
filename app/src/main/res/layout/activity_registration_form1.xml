@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".Activity.RegistrationForm1">
 
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -68,59 +69,63 @@
                 android:textStyle="bold" />
 
             <LinearLayout
-                android:padding="5dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:padding="5dp">
 
                 <RadioButton
-                    android:checked="true"
                     android:id="@+id/rb_register_manufacture"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:buttonTint="@color/colorPrimary"
-                    android:fontFamily="@font/regular"
-                    android:text="Manufacture" />
+                    android:checked="true"
+                    android:fontFamily="@font/semibold"
+                    android:text="Manufacture"
+                    android:textSize="16dp" />
 
                 <RadioButton
-                    android:checked="false"
                     android:id="@+id/rb_register_traders"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="right"
                     android:layout_weight="1"
                     android:buttonTint="@color/colorPrimary"
-                    android:fontFamily="@font/regular"
-                    android:text="Traders" />
+                    android:checked="false"
+                    android:fontFamily="@font/semibold"
+                    android:text="Traders"
+                    android:textSize="16dp" />
             </LinearLayout>
 
             <LinearLayout
-                android:padding="5dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:padding="5dp">
 
 
                 <RadioButton
-                    android:checked="false"
                     android:id="@+id/rb_register_service"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:buttonTint="@color/colorPrimary"
-                    android:fontFamily="@font/regular"
-                    android:text="Service" />
+                    android:checked="false"
+                    android:fontFamily="@font/semibold"
+                    android:text="Service"
+                    android:textSize="16dp" />
 
                 <RadioButton
-                    android:checked="false"
                     android:id="@+id/rb_register_broker"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:buttonTint="@color/colorPrimary"
-                    android:fontFamily="@font/regular"
-                    android:text="Broker" />
+                    android:checked="false"
+                    android:fontFamily="@font/semibold"
+                    android:text="Broker"
+                    android:textSize="16dp" />
             </LinearLayout>
 
             <LinearLayout
@@ -140,29 +145,29 @@
 
 
                 <EditText
-                    android:inputType="textEmailAddress"
                     style="@style/style_edittext"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
-                    android:hint="Email" />
+                    android:hint="Email"
+                    android:inputType="textEmailAddress" />
 
 
                 <EditText
-                    android:inputType="textPassword"
                     style="@style/style_edittext"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="0dp"
-                    android:hint="Password" />
+                    android:hint="Password"
+                    android:inputType="textPassword" />
 
                 <EditText
-                    android:inputType="textPassword"
                     style="@style/style_edittext"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="0dp"
-                    android:hint="Confirm Password" />
+                    android:hint="Confirm Password"
+                    android:inputType="textPassword" />
 
                 <EditText
                     style="@style/style_edittext"

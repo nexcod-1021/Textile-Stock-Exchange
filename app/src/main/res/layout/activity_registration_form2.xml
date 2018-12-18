@@ -109,9 +109,11 @@
         <Spinner
             android:id="@+id/spRegistrationSelectCategory"
             style="@style/style_spinner"
+            android:padding="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="0dp"
+            android:layout_marginTop="10dp"
+            android:background="@mipmap/select_category_textfield"
             android:entries="@array/select_category" />
 
         <EditText
@@ -119,7 +121,7 @@
             style="@style/style_edittext"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="0dp"
+            android:layout_marginTop="10dp"
             android:hint="Sub category" />
 
         <LinearLayout
@@ -141,8 +143,11 @@
                 android:id="@+id/spRegistrationMeters"
                 style="@style/style_spinner"
                 android:layout_width="0dp"
+                android:padding="7dp"
+                android:layout_marginLeft="5dp"
+                android:background="@mipmap/spinner_half"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="0dp"
+                android:layout_marginTop="3dp"
                 android:layout_weight="1"
                 android:entries="@array/Meters" />
 

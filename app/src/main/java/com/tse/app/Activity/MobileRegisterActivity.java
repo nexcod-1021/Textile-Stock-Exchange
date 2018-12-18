@@ -44,7 +44,7 @@ public class MobileRegisterActivity extends AppCompatActivity {
         setContentView(R.layout.activity_mobile_register);
         findViewByIdS();
 
-        startActivity(new Intent(getApplicationContext(), HomeActivity.class));
+
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(MobileRegisterActivity.this);
         editor = sharedPreferences.edit();
 

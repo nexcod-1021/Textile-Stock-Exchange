@@ -4,6 +4,9 @@
     package="com.tse.app">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+
 
     <application
         android:allowBackup="true"
@@ -16,11 +19,8 @@
         <activity
             android:name=".Activity.SplashScreanActivity"
             android:theme="@style/no_actionbar">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+
         </activity>
         <activity
             android:name=".Activity.MobileRegisterActivity"
@@ -38,18 +38,33 @@
             android:name=".Activity.RegistrationForm2"
             android:label="Registration"
             android:parentActivityName=".Activity.RegistrationForm1"
-            android:windowSoftInputMode="stateAlwaysHidden" />
+            android:windowSoftInputMode="stateAlwaysHidden" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".Activity.LoginActivity"
             android:theme="@style/no_actionbar"
             android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
         <activity android:name=".Activity.ForgotPasswordActivity" />
-        <activity android:name=".Activity.EditProfileActivity"
-            android:windowSoftInputMode="stateAlwaysHidden"/>
+        <activity
+            android:name=".Activity.EditProfileActivity"
+            android:windowSoftInputMode="stateAlwaysHidden" >
+
+        </activity>
         <activity
             android:name=".Activity.HomeActivity"
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="stateAlwaysHidden" />
+        <activity android:name=".Activity.ChangePasswordActivity"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="stateAlwaysHidden">
+
+
+        </activity>
     </application>
 
 </manifest>

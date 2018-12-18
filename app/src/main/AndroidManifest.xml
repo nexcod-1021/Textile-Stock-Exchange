@@ -19,7 +19,11 @@
         <activity
             android:name=".Activity.SplashScreanActivity"
             android:theme="@style/no_actionbar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
 
         </activity>
         <activity
@@ -34,11 +38,7 @@
             android:label="Registration"
             android:parentActivityName=".Activity.VerifyOTPActivity"
             android:windowSoftInputMode="stateAlwaysHidden" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
 
         <activity

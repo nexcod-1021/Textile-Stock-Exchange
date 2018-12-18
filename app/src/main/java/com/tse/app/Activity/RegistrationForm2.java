@@ -170,7 +170,7 @@ public class RegistrationForm2 extends AppCompatActivity {
                     {
                         @Override
                         public void onResponse(String response) {
-                            Toast.makeText(RegistrationForm2.this, response, Toast.LENGTH_SHORT).show();
+
                             try {
                                 JSONObject j = new JSONObject(response.trim());
                                 System.out.println("Get Category :" + response.trim());

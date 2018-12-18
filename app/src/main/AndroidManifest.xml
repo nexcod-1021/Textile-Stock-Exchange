@@ -33,17 +33,21 @@
             android:name=".Activity.RegistrationForm1"
             android:label="Registration"
             android:parentActivityName=".Activity.VerifyOTPActivity"
-            android:windowSoftInputMode="stateAlwaysHidden" />
-        <activity
-            android:name=".Activity.RegistrationForm2"
-            android:label="Registration"
-            android:parentActivityName=".Activity.RegistrationForm1"
             android:windowSoftInputMode="stateAlwaysHidden" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".Activity.RegistrationForm2"
+            android:label="Registration"
+            android:parentActivityName=".Activity.RegistrationForm1"
+            android:windowSoftInputMode="stateAlwaysHidden" >
+
+
         </activity>
         <activity
             android:name=".Activity.LoginActivity"

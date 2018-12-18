@@ -84,8 +84,13 @@ public class RegistrationForm1 extends AppCompatActivity {
 
     public void MoveRegistrationform2(View view) {
         if (validation()) {
-            Intent intent = new Intent(getApplicationContext(), RegistrationForm2.class);
-            startActivity(intent);
+
+            if(edRegistrationPassword.getText().toString().equals(edRegistrationCnfirmPassword.getText().toString())) {
+                Intent intent = new Intent(getApplicationContext(), RegistrationForm2.class);
+                startActivity(intent);
+            }else {
+                edRegistrationCnfirmPassword.setError("password  not are match");
+            }
        }
 
 

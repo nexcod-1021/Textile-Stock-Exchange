@@ -12,6 +12,7 @@ import android.widget.RadioButton;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -21,6 +22,11 @@ import com.android.volley.toolbox.Volley;
 import com.tse.app.Config;
 import com.tse.app.R;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.Map;
+
 public class RegistrationForm2 extends AppCompatActivity {
     Spinner spRegistrationSelectCategory, spRegistrationMeters;
     EditText edRegistrationAddress1, edRegistrationArea1, edRegistrationPincode1, edRegistrationAddress2,
@@ -28,7 +34,6 @@ public class RegistrationForm2 extends AppCompatActivity {
             edRegistrationSubCategory, edRegistrationQuantity, edRegistrationReferralCode;
     RadioButton rbRegistrationGeneral, rbRegistrationPrime;
     ProgressDialog pg;
-    LinearLayout linearLayout;
 
 
     @Override
@@ -63,11 +68,12 @@ public class RegistrationForm2 extends AppCompatActivity {
         edRegistrationSubCategory = (EditText) findViewById(R.id.edRegistrationSubCategory);
         edRegistrationQuantity = (EditText) findViewById(R.id.edRegistrationQuantity);
         edRegistrationReferralCode = (EditText) findViewById(R.id.edRegistrationReferralCode);
-        linearLayout = (LinearLayout) findViewById(R.id.layouy);
+
     }
 
     public void movelogin(View view) {
         if (Validation()) {
+
             Intent intent = new Intent(RegistrationForm2.this, LoginActivity.class);
             startActivity(intent);
         }
@@ -120,13 +126,22 @@ public class RegistrationForm2 extends AppCompatActivity {
     private class Get_price extends AsyncTask<String, Void, String> {
         @Override
         protected String doInBackground(String... strings) {
-            StringRequest ExampleStringRequest = new StringRequest(Request.Method.GET, Config.get_price, new Response.Listener<String>() {
+            StringRequest ExampleStringRequest = new StringRequest(Request.Method.POST, Config.BaseUrl+Config.get_price, new Response.Listener<String>() {
                 @Override
                 public void onResponse(String response) {
-                    Toast.makeText(RegistrationForm2.this, response, Toast.LENGTH_SHORT).show();
+                    try {
+                        JSONObject j = new JSONObject(response.trim());
+                        System.out.println("Get Price :" + response.trim());
+                        if (j.getString("STATUS").equalsIgnoreCase("true")) {
 
 
+                        } else {
 
+                        }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+
+                    }
                 }
             }, new Response.ErrorListener() { //Create an error listener to handle errors appropriately.
                 @Override
@@ -149,12 +164,25 @@ public class RegistrationForm2 extends AppCompatActivity {
 
         @Override
         protected String doInBackground(String... strings) {
-            StringRequest stringRequest = new StringRequest(Request.Method.POST, Config.get_category,
+            StringRequest stringRequest = new StringRequest(Request.Method.POST, Config.BaseUrl+Config.get_category,
                     new Response.Listener<String>()
                     {
                         @Override
                         public void onResponse(String response) {
                             Toast.makeText(RegistrationForm2.this, response, Toast.LENGTH_SHORT).show();
+                            try {
+                                JSONObject j = new JSONObject(response.trim());
+                                System.out.println("Get Category :" + response.trim());
+                                if (j.getString("STATUS").equalsIgnoreCase("true")) {
+
+
+                                } else {
+
+                                }
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+
+                            }
 
                         }
                     },
@@ -184,10 +212,24 @@ public class RegistrationForm2 extends AppCompatActivity {
 
         @Override
         protected String doInBackground(String... strings) {
-            StringRequest stringRequest = new StringRequest(Request.Method.POST, Config.get_qty, new Response.Listener<String>() {
+            StringRequest stringRequest = new StringRequest(Request.Method.POST, Config.BaseUrl + Config.get_qty, new Response.Listener<String>() {
                 @Override
                 public void onResponse(String response) {
-                    Toast.makeText(RegistrationForm2.this, response, Toast.LENGTH_SHORT).show();
+
+                    try {
+                        JSONObject j = new JSONObject(response.trim());
+                        System.out.println("Get QTY :" + response.trim());
+                        if (j.getString("STATUS").equalsIgnoreCase("true")) {
+
+
+                        } else {
+
+                        }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+
+                    }
+
                 }
 
             }, new Response.ErrorListener() {
@@ -196,6 +238,8 @@ public class RegistrationForm2 extends AppCompatActivity {
 
                 }
             });
+
+
             RequestQueue requestQueue = Volley.newRequestQueue(RegistrationForm2.this);
             requestQueue.add(stringRequest);
 

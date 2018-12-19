@@ -1,26 +1,36 @@
 package com.tse.app.Activity;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
+import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.RadioButton;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.tse.app.R;
 
 public class RegistrationForm1 extends AppCompatActivity {
 
     RadioButton rbRegisterManufature, rbRegisterTraders, rbRegisterService, rbRegisterBroker;
-    EditText edRegistrationfirstName,edRegistrationLastName, edRegistrationEmail, edRegistrationPassword, edRegistrationCnfirmPassword, edRegistrationcEnterprice, edRegistrationGstNo, edRegistrationPanNo;
+    EditText edRegistrationfirstName, edRegistrationLastName, edRegistrationEmail, edRegistrationPassword, edRegistrationCnfirmPassword, edRegistrationcEnterprice, edRegistrationGstNo, edRegistrationPanNo;
+    ImageView ivProfileImage;
 
+    ProgressDialog dialog;
+    private int PICK_PDF_REQUEST = 1;
+    private static final String TAG = EditProfileActivity.class.getSimpleName();
+    String selectedFilePath;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registration_form1);
         findViewByIdS();
-
 
         rbRegisterManufature.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -61,6 +71,12 @@ public class RegistrationForm1 extends AppCompatActivity {
             }
         });
 
+        ivProfileImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showFileChooser();
+            }
+        });
 
     }
 
@@ -78,22 +94,17 @@ public class RegistrationForm1 extends AppCompatActivity {
         edRegistrationcEnterprice = (EditText) findViewById(R.id.edRegistrationcEnterprice);
         edRegistrationGstNo = (EditText) findViewById(R.id.edRegistrationGstNo);
         edRegistrationPanNo = (EditText) findViewById(R.id.edRegistrationPanNo);
-
+        ivProfileImage = (ImageView) findViewById(R.id.iv_register_profile_pic);
     }
-
 
     public void MoveRegistrationform2(View view) {
         if (validation()) {
 
-            if(edRegistrationPassword.getText().toString().equals(edRegistrationCnfirmPassword.getText().toString())) {
-                Intent intent = new Intent(getApplicationContext(), RegistrationForm2.class);
-                startActivity(intent);
-            }else {
-                edRegistrationCnfirmPassword.setError("password  not are match");
-            }
-       }
+            Intent intent = new Intent(getApplicationContext(), RegistrationForm2.class);
+            startActivity(intent);
 
 
+        }
     }
 
     public boolean validation() {
@@ -103,9 +114,7 @@ public class RegistrationForm1 extends AppCompatActivity {
         } else if (edRegistrationLastName.getText().toString().length() == 0) {
             edRegistrationLastName.setError("Please enter Last Name");
             return false;
-        }
-
-        else if (edRegistrationEmail.getText().toString().length() == 0) {
+        } else if (edRegistrationEmail.getText().toString().length() == 0) {
             edRegistrationEmail.setError("Please enter Email");
             return false;
         } else if (!edRegistrationEmail.getText().toString().matches("^[a-zA-Z0-9_\\+-]+(\\.[a-zA-Z0-9_\\+-]+)*@[a-zA-Z0-9-]+(\\.[a-zA-Z0-9-]+)*\\.([a-zA-Z]{2,4})$")) {
@@ -131,8 +140,31 @@ public class RegistrationForm1 extends AppCompatActivity {
             edRegistrationPanNo.setError("Please enter PAN NO.");
             return false;
 
+        } else if (!edRegistrationPassword.getText().toString().equals(edRegistrationCnfirmPassword.getText().toString())) {
+            edRegistrationCnfirmPassword.setError("password  not are match");
+            return false;
         }
         return true;
     }
 
+    private void showFileChooser() {
+
+        Intent intent = new Intent();
+        intent.setType("image/*");
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        startActivityForResult(Intent.createChooser(intent, "Choose File"), PICK_PDF_REQUEST);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == PICK_PDF_REQUEST && resultCode == RESULT_OK && data != null && data.getData() != null) {
+
+            Uri selectedFileUri = data.getData();
+            selectedFilePath = FilePath.getPath(this, selectedFileUri);
+            Glide.with(getApplicationContext()).load(selectedFilePath).centerCrop().diskCacheStrategy(DiskCacheStrategy.ALL).into(ivProfileImage);
+            Log.i(TAG, "Selected File Path:" + selectedFilePath);
+        }
+    }
 }

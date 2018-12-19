@@ -24,7 +24,6 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.bumptech.glide.load.resource.bitmap.CenterInside;
 import com.tse.app.Fragment.AboutUsFragment;
 import com.tse.app.Fragment.ContactUsFragment;
 import com.tse.app.R;

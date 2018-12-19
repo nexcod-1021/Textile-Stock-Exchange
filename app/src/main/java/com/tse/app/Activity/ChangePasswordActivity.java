@@ -9,7 +9,7 @@ import android.widget.EditText;
 import com.tse.app.R;
 
 public class ChangePasswordActivity extends AppCompatActivity {
-    EditText edCurrentPasswor,edNewPasswor,edConfirmPasswor;
+    EditText edCurrentPassword, edNewPassword, edConfirmPassword;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,49 +20,37 @@ public class ChangePasswordActivity extends AppCompatActivity {
     }
 
     private void findViewBy_Id() {
-        edCurrentPasswor = (EditText) findViewById(R.id.edCurrentPasswor);
-        edNewPasswor = (EditText) findViewById(R.id.edNewPasswor);
-        edConfirmPasswor = (EditText) findViewById(R.id.edConfirmPasswor);
+        edCurrentPassword = (EditText) findViewById(R.id.edCurrentPasswor);
+        edNewPassword = (EditText) findViewById(R.id.edNewPasswor);
+        edConfirmPassword = (EditText) findViewById(R.id.edConfirmPasswor);
 
     }
 
     public void MovetoLoginActivity(View view) {
-        if (Validation()){
-             if(edNewPasswor.getText().toString().equals(edConfirmPasswor.getText().toString())) {
-                 Intent intent = new Intent(ChangePasswordActivity.this,LoginActivity.class);
-                 startActivity(intent);
-             }else {
-                 edConfirmPasswor.setError("password  not are match");
-             }
-
-
+        if (Validation()) {
+            Intent intent = new Intent(ChangePasswordActivity.this, LoginActivity.class);
+            startActivity(intent);
         }
-
-
-
     }
 
     public boolean Validation() {
-        if (edCurrentPasswor.getText().toString().length()==0){
-            edCurrentPasswor.setError("Please Enter Current Password");
+        if (edCurrentPassword.getText().toString().length() == 0) {
+            edCurrentPassword.setError("Please Enter Current Password");
             return false;
-        }
-       else if (edNewPasswor.getText().toString().length()==0){
-            edNewPasswor.setError("Please Enter New Password");
+        } else if (edNewPassword.getText().toString().length() == 0) {
+            edNewPassword.setError("Please Enter New Password");
             return false;
-        }
-        else if (edConfirmPasswor.getText().toString().length()==0){
-            edConfirmPasswor.setError("Please Enter Confirm Password");
+        } else if (edConfirmPassword.getText().toString().length() == 0) {
+            edConfirmPassword.setError("Please Enter Confirm Password");
             return false;
 
-        }else {
-
-            return true;
+        } else if (!edNewPassword.getText().toString().equals(edConfirmPassword.getText().toString())) {
+            edConfirmPassword.setError("password  not are match");
+            return false;
 
         }
 
 
-
-
+        return true;
     }
 }

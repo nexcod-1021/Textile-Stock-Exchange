@@ -2,21 +2,14 @@ package com.tse.app.Activity;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.content.res.Resources;
-import android.graphics.Color;
 import android.os.AsyncTask;
-import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -26,15 +19,12 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.bumptech.glide.load.engine.Resource;
 import com.tse.app.Config;
 import com.tse.app.R;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.ArrayList;
 import java.util.Map;
 
 public class RegistrationForm2 extends AppCompatActivity {
@@ -43,50 +33,23 @@ public class RegistrationForm2 extends AppCompatActivity {
             edRegistrationArea2, edRegistrationPincode2, edRegistrationContactNo1, edRegistrationContactNo2,
             edRegistrationSubCategory, edRegistrationQuantity, edRegistrationReferralCode;
     RadioButton rbRegistrationGeneral, rbRegistrationPrime;
-    ProgressDialog pg, pg2;
-    SharedPreferences sharedPreferences;
-    SharedPreferences.Editor editor;
-    ArrayList<String> cat_name_list;
-    ArrayList<String> qty_type_list;
+    ProgressDialog pg;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registration_form2);
-        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(RegistrationForm2.this);
-        editor = sharedPreferences.edit();
 
         Findviewby_Id();
 
-        new Get_price().execute();
-        new Get_Category().execute();
-        new get_qty().execute();
-        spRegistrationSelectCategory.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                ((TextView) parent.getChildAt(0)).setTextColor(getResources().getColor(R.color.colorBlack));
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
-        spRegistrationMeters.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                ((TextView) parent.getChildAt(0)).setTextColor(getResources().getColor(R.color.colorBlack));
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
+        new  Get_price().execute();
+        new  Get_Category().execute();
+        new  get_qty().execute();
 
 
     }
+
 
 
     private void Findviewby_Id() {
@@ -163,7 +126,7 @@ public class RegistrationForm2 extends AppCompatActivity {
     private class Get_price extends AsyncTask<String, Void, String> {
         @Override
         protected String doInBackground(String... strings) {
-            StringRequest ExampleStringRequest = new StringRequest(Request.Method.POST, Config.BaseUrl + Config.get_price, new Response.Listener<String>() {
+            StringRequest ExampleStringRequest = new StringRequest(Request.Method.POST, Config.BaseUrl+Config.get_price, new Response.Listener<String>() {
                 @Override
                 public void onResponse(String response) {
                     try {
@@ -171,29 +134,6 @@ public class RegistrationForm2 extends AppCompatActivity {
                         System.out.println("Get Price :" + response.trim());
                         if (j.getString("STATUS").equalsIgnoreCase("true")) {
 
-                            String response1 = j.getString("response");
-
-
-                            JSONArray arr = new JSONArray(response1);
-                            for (int i = 0; i < arr.length(); i++) {
-                                JSONObject jsonProductObject = arr.getJSONObject(i);
-
-
-                                if (jsonProductObject.getString("price_type").equals("general")) {
-                                    editor.putString(Config.spPriceGeneral, jsonProductObject.getString("price"));
-                                }
-                                if (jsonProductObject.getString("price_type").equals("prime")) {
-                                    editor.putString(Config.spPricePrime, jsonProductObject.getString("price"));
-                                }
-                                if (jsonProductObject.getString("price_type").equals("refferal")) {
-                                    editor.putString(Config.spPriceRefferal, jsonProductObject.getString("price"));
-                                }
-                                if (jsonProductObject.getString("price_type").equals("servicemanfees")) {
-                                    editor.putString(Config.spPriceServicemanFees, jsonProductObject.getString("price"));
-                                }
-
-                            }
-                            editor.commit();
 
 
                         } else {
@@ -204,9 +144,7 @@ public class RegistrationForm2 extends AppCompatActivity {
 
                     }
                 }
-            }, new Response.ErrorListener()
-
-            { //Create an error listener to handle errors appropriately.
+            }, new Response.ErrorListener() { //Create an error listener to handle errors appropriately.
                 @Override
                 public void onErrorResponse(VolleyError error) {
                     //This code is executed if there is an error.
@@ -219,19 +157,17 @@ public class RegistrationForm2 extends AppCompatActivity {
         }
     }
 
-    private class Get_Category extends AsyncTask<String, Void, String> {
+    private class Get_Category extends AsyncTask<String,Void,String>{
         @Override
         protected void onPreExecute() {
-            pg2 = new ProgressDialog(RegistrationForm2.this);
-            pg2.setTitle("Authentication...2");
-            pg2.setMessage(Config.LoadingMsg);
-            pg2.show();
+            super.onPreExecute();
         }
 
         @Override
         protected String doInBackground(String... strings) {
-            StringRequest stringRequest = new StringRequest(Request.Method.POST, Config.BaseUrl + Config.get_category,
-                    new Response.Listener<String>() {
+            StringRequest stringRequest = new StringRequest(Request.Method.POST, Config.BaseUrl+Config.get_category,
+                    new Response.Listener<String>()
+                    {
                         @Override
                         public void onResponse(String response) {
 
@@ -239,39 +175,23 @@ public class RegistrationForm2 extends AppCompatActivity {
                                 JSONObject j = new JSONObject(response.trim());
                                 System.out.println("Get Category :" + response.trim());
                                 if (j.getString("STATUS").equalsIgnoreCase("true")) {
-                                    String response1 = j.getString("response");
-                                    cat_name_list = new ArrayList();
-                                    JSONArray arr = new JSONArray(response1);
-                                    for (int i = 0; i < arr.length(); i++) {
-                                        JSONObject jsonProductObject = arr.getJSONObject(i);
-                                        String cat_name = jsonProductObject.getString("cat_name");
-                                        cat_name_list.add(cat_name);
-                                    }
-                                    ArrayAdapter<String> Select_category = new ArrayAdapter<String>(
-                                            getApplicationContext(),
-                                            android.R.layout.simple_list_item_1,
-                                            cat_name_list
-                                    );
 
-                                    spRegistrationSelectCategory.setAdapter(Select_category);
-
-                                    pg2.dismiss();
 
                                 } else {
-                                    pg2.dismiss();
+
                                 }
                             } catch (JSONException e) {
                                 e.printStackTrace();
-                                pg2.dismiss();
 
                             }
 
                         }
                     },
-                    new Response.ErrorListener() {
+                    new Response.ErrorListener()
+                    {
                         @Override
                         public void onErrorResponse(VolleyError error) {
-                            pg2.dismiss();
+
                         }
                     });
             RequestQueue requestQueue = Volley.newRequestQueue(RegistrationForm2.this);
@@ -281,23 +201,14 @@ public class RegistrationForm2 extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(String s) {
-           /* ArrayAdapter<String> Select_category = new ArrayAdapter<String>(
-                    getApplicationContext(),
-                    android.R.layout.simple_spinner_item,
-                    cat_name_list
-            );
-            spRegistrationSelectCategory.setAdapter(Select_category);*/
+            super.onPostExecute(s);
         }
     }
 
-    private class get_qty extends AsyncTask<String, Void, String> {
+    private class get_qty extends AsyncTask<String,Void,String>{
         @Override
         protected void onPreExecute() {
-            pg = new ProgressDialog(RegistrationForm2.this);
-            pg.setTitle("Authentication...1");
-            pg.setMessage(Config.LoadingMsg);
-            pg.show();
-
+            super.onPreExecute();
         }
 
         @Override
@@ -310,29 +221,14 @@ public class RegistrationForm2 extends AppCompatActivity {
                         JSONObject j = new JSONObject(response.trim());
                         System.out.println("Get QTY :" + response.trim());
                         if (j.getString("STATUS").equalsIgnoreCase("true")) {
-                            String response1 = j.getString("response");
-                            qty_type_list = new ArrayList();
-                            JSONArray arr = new JSONArray(response1);
-                            for (int i = 0; i < arr.length(); i++) {
-                                JSONObject jsonProductObject = arr.getJSONObject(i);
-                                String cat_name = jsonProductObject.getString("qty_type");
-                                qty_type_list.add(cat_name);
-                            }
-                            ArrayAdapter<String> Select_category = new ArrayAdapter<String>(
-                                    getApplicationContext(),
-                                    android.R.layout.simple_list_item_1,
-                                    qty_type_list
-                            );
 
-                            spRegistrationMeters.setAdapter(Select_category);
-                            pg.dismiss();
 
                         } else {
-                            pg.dismiss();
+
                         }
                     } catch (JSONException e) {
                         e.printStackTrace();
-                        pg.dismiss();
+
                     }
 
                 }
@@ -340,7 +236,7 @@ public class RegistrationForm2 extends AppCompatActivity {
             }, new Response.ErrorListener() {
                 @Override
                 public void onErrorResponse(VolleyError error) {
-                    pg.dismiss();
+
                 }
             });
 

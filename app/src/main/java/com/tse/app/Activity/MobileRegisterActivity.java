@@ -44,7 +44,6 @@ public class MobileRegisterActivity extends AppCompatActivity {
         setContentView(R.layout.activity_mobile_register);
         findViewByIdS();
 
-       startActivity(new Intent(getApplicationContext(),RegistrationForm2.class));
 
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(MobileRegisterActivity.this);
         editor = sharedPreferences.edit();
@@ -52,7 +51,11 @@ public class MobileRegisterActivity extends AppCompatActivity {
         btnMobileRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new CheckExistMobile().execute();
+                if(edMobileNumber.getText().toString().length()==10) {
+                    new CheckExistMobile().execute();
+                }else{
+                    edMobileNumber.setError("Please Enter Valid Mobile Number");
+                }
 
             }
         });

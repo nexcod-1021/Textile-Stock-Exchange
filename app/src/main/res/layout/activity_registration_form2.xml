@@ -109,7 +109,6 @@
         <Spinner
             android:id="@+id/spRegistrationSelectCategory"
             style="@style/style_spinner"
-
             android:layout_width="match_parent"
             android:layout_height="38dp"
             android:layout_marginTop="10dp"

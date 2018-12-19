@@ -10,8 +10,6 @@ public class Config {
     public static final String get_qty = "get_qty";
     public static final String  UrlExistMobile= "otp";
 
-
-
     public static final String  LoadingMsg= "Please Wait...";
     public static final String  response= "response";
 

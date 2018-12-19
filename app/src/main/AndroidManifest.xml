@@ -67,8 +67,6 @@
         <activity android:name=".Activity.ChangePasswordActivity"
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="stateAlwaysHidden">
-
-
         </activity>
         <service android:name=".MyService"
             android:enabled="true">

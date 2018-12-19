@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.Window;
 import android.view.WindowManager;
 
+import com.tse.app.MyService;
 import com.tse.app.R;
 
 public class SplashScreanActivity extends AppCompatActivity {
@@ -19,7 +20,7 @@ public class SplashScreanActivity extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_splash_screan);
-        // startService(new Intent(getBaseContext(), MyService.class));
+        startService(new Intent(getBaseContext(), MyService.class));
 
         handler=new Handler();
         handler.postDelayed(new Runnable() {

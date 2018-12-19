@@ -41,7 +41,7 @@
                 android:layout_marginTop="0dp"
                 android:layout_weight="1"
                 android:hint="Pincode 1"
-                android:inputType="number"/>
+                android:inputType="number" />
 
         </LinearLayout>
 
@@ -75,7 +75,7 @@
                 android:layout_marginTop="0dp"
                 android:layout_weight="1"
                 android:hint="Pincode 2"
-                android:inputType="number"/>
+                android:inputType="number" />
 
         </LinearLayout>
 
@@ -92,7 +92,7 @@
                 android:layout_marginTop="0dp"
                 android:layout_weight="1"
                 android:hint="Contact No.1"
-                android:inputType="number"/>
+                android:inputType="number" />
 
             <EditText
                 android:id="@+id/edRegistrationContactNo2"
@@ -102,19 +102,18 @@
                 android:layout_marginTop="0dp"
                 android:layout_weight="1"
                 android:hint="Contact No.2"
-                android:inputType="number"/>
+                android:inputType="number" />
 
         </LinearLayout>
 
         <Spinner
             android:id="@+id/spRegistrationSelectCategory"
             style="@style/style_spinner"
-            android:padding="10dp"
+
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="38dp"
             android:layout_marginTop="10dp"
-            android:background="@mipmap/select_category_textfield"
-            android:entries="@array/select_category" />
+            android:background="@mipmap/select_category_textfield" />
 
         <EditText
             android:id="@+id/edRegistrationSubCategory"
@@ -137,19 +136,17 @@
                 android:layout_marginTop="0dp"
                 android:layout_weight="1"
                 android:hint="Quantity"
-                android:inputType="number"/>
+                android:inputType="number" />
 
             <Spinner
                 android:id="@+id/spRegistrationMeters"
                 style="@style/style_spinner"
                 android:layout_width="0dp"
-                android:padding="7dp"
+                android:layout_height="38dp"
                 android:layout_marginLeft="5dp"
-                android:background="@mipmap/spinner_half"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="3dp"
+                android:layout_marginTop="12dp"
                 android:layout_weight="1"
-                android:entries="@array/Meters" />
+                android:background="@mipmap/spinner_half" />
 
         </LinearLayout>
 
@@ -172,12 +169,12 @@
             <TextView
                 style="@style/style_edittext"
                 android:layout_width="0dp"
-                android:paddingLeft="5dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="0dp"
                 android:layout_weight="1"
                 android:fontFamily="@font/regular"
-                android:hint="Membership" />
+                android:hint="Membership"
+                android:paddingLeft="5dp" />
 
             <RadioGroup
                 android:layout_width="0dp"

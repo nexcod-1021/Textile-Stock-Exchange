@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:gravity="center"
+    android:elevation="10dp"
+    android:padding="20dp">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/style_textview"
+                android:text="Code -"
+                android:textSize="14sp"
+                android:textColor="@color/colorsigleline"/>
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                style="@style/style_textview"
+                android:text="Code"
+                android:paddingLeft="10dp"
+                android:textSize="14sp"
+                android:fontFamily="@font/semibold"/>
+            <Button
+                android:id="@+id/btnViewDetail"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                style="@style/style_button"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:text="View Detail"
+                android:textSize="14sp"
+                android:textAllCaps="false"
+                android:background="@drawable/button_background"
+                android:fontFamily="@font/semibold"/>
+
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                style="@style/style_textview"
+                android:text="Product Name -"
+                android:textSize="14sp"
+                android:textColor="@color/colorsigleline"/>
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                style="@style/style_textview"
+                android:text="Print Saree"
+                android:paddingLeft="10dp"
+                android:textSize="14sp"
+                android:fontFamily="@font/semibold"/>
+
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="10dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                style="@style/style_textview"
+                android:text="Category -"
+                android:textSize="14sp"
+                android:textColor="@color/colorsigleline"/>
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                style="@style/style_textview"
+                android:text="Plan Fabrics"
+                android:paddingLeft="10dp"
+                android:textSize="14sp"
+                android:fontFamily="@font/semibold"/>
+
+
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="10dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                style="@style/style_textview"
+                android:text="Sub Category -"
+                android:textSize="14sp"
+                android:textColor="@color/colorsigleline"/>
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                style="@style/style_textview"
+                android:text="Fabrics"
+                android:layout_weight="1"
+                android:textSize="14sp"
+                android:paddingLeft="10dp"
+                android:fontFamily="@font/semibold"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+
+</LinearLayout>

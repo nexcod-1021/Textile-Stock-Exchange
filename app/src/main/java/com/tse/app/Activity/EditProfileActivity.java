@@ -67,8 +67,6 @@ public class EditProfileActivity extends AppCompatActivity implements TabLayout.
 
 
         viewPager = (ViewPager) findViewById(R.id.pager);
-
-
         Pager_Editprofile adapter = new Pager_Editprofile(getSupportFragmentManager(), tabLayout.getTabCount());
         viewPager.setAdapter(adapter);
         tabLayout.setOnTabSelectedListener(this);

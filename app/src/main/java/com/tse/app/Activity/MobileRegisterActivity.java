@@ -43,8 +43,6 @@ public class MobileRegisterActivity extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_mobile_register);
         findViewByIdS();
-
-
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(MobileRegisterActivity.this);
         editor = sharedPreferences.edit();
 
@@ -74,6 +72,7 @@ public class MobileRegisterActivity extends AppCompatActivity {
             pg.setTitle("Authentication...");
             pg.setMessage(Config.LoadingMsg);
             pg.show();
+
         }
 
         @Override
@@ -87,10 +86,12 @@ public class MobileRegisterActivity extends AppCompatActivity {
                                 System.out.println("Exist mobile :" + response.trim());
                                 if (j.getString("STATUS").equalsIgnoreCase("true")) {
                                     Intent intent  = new Intent(getApplicationContext(),VerifyOTPActivity.class);
-                                    intent.putExtra("mobile", String.valueOf(j.getString(Config.response)));
+                                    intent.putExtra("mobile", edMobileNumber.getText().toString());
+                                    intent.putExtra("code", String.valueOf(j.getString(Config.response)));
                                     startActivity(intent);
                                     pg.dismiss();
                                 } else {
+                                    Toast.makeText(MobileRegisterActivity.this, ""+j.getString("MESSAGE"), Toast.LENGTH_SHORT).show();
                                     pg.dismiss();
                                 }
                             } catch (JSONException e) {

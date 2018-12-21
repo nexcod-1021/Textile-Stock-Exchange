@@ -6,9 +6,12 @@ import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.graphics.Color;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.preference.PreferenceManager;
+import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -27,42 +30,96 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.load.engine.Resource;
+import com.tse.app.AndroidMultiPartEntity;
 import com.tse.app.Config;
 import com.tse.app.R;
 
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.mime.content.FileBody;
+import org.apache.http.entity.mime.content.StringBody;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.util.EntityUtils;
+import org.apache.http.util.TextUtils;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
 
 public class RegistrationForm2 extends AppCompatActivity {
-    Spinner spRegistrationSelectCategory, spRegistrationMeters;
-    EditText edRegistrationAddress1, edRegistrationArea1, edRegistrationPincode1, edRegistrationAddress2,
-            edRegistrationArea2, edRegistrationPincode2, edRegistrationContactNo1, edRegistrationContactNo2,
-            edRegistrationSubCategory, edRegistrationQuantity, edRegistrationReferralCode;
-    RadioButton rbRegistrationGeneral, rbRegistrationPrime;
+    Spinner spRegisterSelectCategory, spRegisterMeters;
+    EditText edRegisterAddress1, edRegisterArea1, edRegisterPincode1, edRegisterAddress2,
+            edRegisterArea2, edRegisterPincode2, edRegisterContactNo1, edRegisterContactNo2,
+            edRegisterSubCategory, edRegisterQuantity, edRegisterReferralCode;
+    RadioButton rbRegisterGeneral, rbRegisterPrime;
     ProgressDialog pg, pg2;
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
     ArrayList<String> cat_name_list;
     ArrayList<String> qty_type_list;
 
+    long totalSize = 0;
+
+    ProgressDialog dialog;
+    private int PICK_PDF_REQUEST = 1;
+    private static final String TAG = EditProfileActivity.class.getSimpleName();
+    String selectedFilePath;
+    String MemberType = "";
 
     @Override
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registration_form2);
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(RegistrationForm2.this);
         editor = sharedPreferences.edit();
-
         Findviewby_Id();
+
+        edRegisterContactNo1.setText(getIntent().getExtras().getString(Config.Contact1));
+        edRegisterContactNo1.setEnabled(false);
+
+        selectedFilePath = getIntent().getExtras().getString(Config.profileUrl);
+
 
         new Get_price().execute();
         new Get_Category().execute();
         new get_qty().execute();
-        spRegistrationSelectCategory.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        MemberType = rbRegisterGeneral.getText().toString();
+
+        rbRegisterGeneral.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MemberType = rbRegisterGeneral.getText().toString();
+            }
+        });
+        rbRegisterPrime.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MemberType = rbRegisterPrime.getText().toString();
+            }
+        });
+
+        spRegisterSelectCategory.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                ((TextView) parent.getChildAt(0)).setTextColor(getResources().getColor(R.color.colorBlack));
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+        spRegisterMeters.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 ((TextView) parent.getChildAt(0)).setTextColor(getResources().getColor(R.color.colorBlack));
@@ -73,89 +130,79 @@ public class RegistrationForm2 extends AppCompatActivity {
 
             }
         });
-        spRegistrationMeters.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                ((TextView) parent.getChildAt(0)).setTextColor(getResources().getColor(R.color.colorBlack));
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
-
 
     }
 
-
     private void Findviewby_Id() {
-        spRegistrationSelectCategory = (Spinner) findViewById(R.id.spRegistrationSelectCategory);
-        spRegistrationMeters = (Spinner) findViewById(R.id.spRegistrationMeters);
-        rbRegistrationGeneral = (RadioButton) findViewById(R.id.rbRegistrationGeneral);
-        rbRegistrationPrime = (RadioButton) findViewById(R.id.rbRegistrationPrime);
-        edRegistrationAddress1 = (EditText) findViewById(R.id.edRegistrationAddress1);
-        edRegistrationArea1 = (EditText) findViewById(R.id.edRegistrationArea1);
-        edRegistrationPincode1 = (EditText) findViewById(R.id.edRegistrationPincode1);
-        edRegistrationAddress2 = (EditText) findViewById(R.id.edRegistrationAddress2);
-        edRegistrationArea2 = (EditText) findViewById(R.id.edRegistrationArea2);
-        edRegistrationPincode2 = (EditText) findViewById(R.id.edRegistrationPincode2);
-        edRegistrationContactNo1 = (EditText) findViewById(R.id.edRegistrationContactNo1);
-        edRegistrationContactNo2 = (EditText) findViewById(R.id.edRegistrationContactNo2);
-        edRegistrationSubCategory = (EditText) findViewById(R.id.edRegistrationSubCategory);
-        edRegistrationQuantity = (EditText) findViewById(R.id.edRegistrationQuantity);
-        edRegistrationReferralCode = (EditText) findViewById(R.id.edRegistrationReferralCode);
+        spRegisterSelectCategory = (Spinner) findViewById(R.id.spRegistrationSelectCategory);
+        spRegisterMeters = (Spinner) findViewById(R.id.spRegistrationMeters);
+        rbRegisterGeneral = (RadioButton) findViewById(R.id.rbRegistrationGeneral);
+        rbRegisterPrime = (RadioButton) findViewById(R.id.rbRegistrationPrime);
+        edRegisterAddress1 = (EditText) findViewById(R.id.edRegistrationAddress1);
+        edRegisterArea1 = (EditText) findViewById(R.id.edRegistrationArea1);
+        edRegisterPincode1 = (EditText) findViewById(R.id.edRegistrationPincode1);
+        edRegisterAddress2 = (EditText) findViewById(R.id.edRegistrationAddress2);
+        edRegisterArea2 = (EditText) findViewById(R.id.edRegistrationArea2);
+        edRegisterPincode2 = (EditText) findViewById(R.id.edRegistrationPincode2);
+        edRegisterContactNo1 = (EditText) findViewById(R.id.edRegistrationContactNo1);
+        edRegisterContactNo2 = (EditText) findViewById(R.id.edRegistrationContactNo2);
+        edRegisterSubCategory = (EditText) findViewById(R.id.edRegistrationSubCategory);
+        edRegisterQuantity = (EditText) findViewById(R.id.edRegistrationQuantity);
+        edRegisterReferralCode = (EditText) findViewById(R.id.edRegistrationReferralCode);
 
     }
 
     public void movelogin(View view) {
         if (Validation()) {
-
-            Intent intent = new Intent(RegistrationForm2.this, LoginActivity.class);
-            startActivity(intent);
+            dialog = ProgressDialog.show(RegistrationForm2.this, "", Config.LoadingMsg, true);
+            new RegisterUser().execute();
         }
-
-
     }
 
     public boolean Validation() {
-        if (edRegistrationAddress1.getText().toString().length() == 0) {
-            edRegistrationAddress1.setError("Please Enter Address 1");
+        if (edRegisterAddress1.getText().toString().length() == 0) {
+            edRegisterAddress1.setError("Please Enter Address 1");
             return false;
-        } else if (edRegistrationArea1.getText().toString().length() == 0) {
-            edRegistrationArea1.setError("Please Enter Area 1");
+        } else if (edRegisterArea1.getText().toString().length() == 0) {
+            edRegisterArea1.setError("Please Enter Area 1");
             return false;
-        } else if (edRegistrationPincode1.getText().toString().length() == 0) {
-            edRegistrationPincode1.setError("Please Enter Pincode 1");
+        } else if (edRegisterPincode1.getText().toString().length() == 0) {
+            edRegisterPincode1.setError("Please Enter Pincode 1");
             return false;
-        } else if (edRegistrationAddress2.getText().toString().length() == 0) {
-            edRegistrationAddress2.setError("Please Enter Address 2");
-            return false;
-        } else if (edRegistrationArea2.getText().toString().length() == 0) {
-            edRegistrationArea2.setError("Please Enter Area 2");
-            return false;
-        } else if (edRegistrationPincode2.getText().toString().length() == 0) {
-            edRegistrationPincode2.setError("Please Enter Pincode 2");
-            return false;
-        } else if (edRegistrationAddress1.getText().toString().length() == 0) {
-            edRegistrationAddress1.setError("Please Enter Address 1");
-            return false;
-        } else if (edRegistrationContactNo1.getText().toString().length() == 0) {
-            edRegistrationContactNo1.setError("Please Enter Contact No. 1");
-            return false;
-        } else if (edRegistrationContactNo2.getText().toString().length() == 0) {
-            edRegistrationContactNo2.setError("Please Enter  Contact No. 2");
-            return false;
-        } else if (edRegistrationSubCategory.getText().toString().length() == 0) {
-            edRegistrationSubCategory.setError("Please Enter Sub category");
-            return false;
-        } else if (edRegistrationQuantity.getText().toString().length() == 0) {
-            edRegistrationQuantity.setError("Please Enter Quantity");
-            return false;
-        } else if (edRegistrationReferralCode.getText().toString().length() == 0) {
-            edRegistrationReferralCode.setError("Please Enter Referral Code");
+        } else if (edRegisterPincode1.getText().toString().length()!= 6) {
+            edRegisterPincode1.setError("Please Enter Valid Pincode");
             return false;
         }
+
+        /*else if (edRegisterAddress2.getText().toString().length() == 0) {
+            edRegisterAddress2.setError("Please Enter Address 2");
+            return false;
+        } else if (edRegisterArea2.getText().toString().length() == 0) {
+            edRegisterArea2.setError("Please Enter Area 2");
+            return false;
+        } else if (edRegisterPincode2.getText().toString().length() == 0) {
+            edRegisterPincode2.setError("Please Enter Pincode 2");
+            return false;
+        } else if (edRegisterContactNo1.getText().toString().length() == 0) {
+            edRegisterContactNo1.setError("Please Enter Contact No. 1");
+            return false;
+        }
+        else if (edRegisterContactNo2.getText().toString().length() == 0) {
+            edRegisterContactNo2.setError("Please Enter  Contact No. 2");
+            return false;
+        }
+        else if (edRegisterSubCategory.getText().toString().length() == 0) {
+            edRegisterSubCategory.setError("Please Enter Sub category");
+            return false;
+        } */
+        else if (edRegisterQuantity.getText().toString().length() == 0) {
+            edRegisterQuantity.setError("Please Enter Quantity");
+            return false;
+        }
+        /*else if (edRegisterReferralCode.getText().toString().length() == 0) {
+            edRegisterReferralCode.setError("Please Enter Referral Code");
+            return false;
+        }*/
         return true;
 
     }
@@ -223,7 +270,7 @@ public class RegistrationForm2 extends AppCompatActivity {
         @Override
         protected void onPreExecute() {
             pg2 = new ProgressDialog(RegistrationForm2.this);
-            pg2.setTitle("Authentication...2");
+            pg2.setTitle("Authentication...");
             pg2.setMessage(Config.LoadingMsg);
             pg2.show();
         }
@@ -253,7 +300,7 @@ public class RegistrationForm2 extends AppCompatActivity {
                                             cat_name_list
                                     );
 
-                                    spRegistrationSelectCategory.setAdapter(Select_category);
+                                    spRegisterSelectCategory.setAdapter(Select_category);
 
                                     pg2.dismiss();
 
@@ -286,7 +333,7 @@ public class RegistrationForm2 extends AppCompatActivity {
                     android.R.layout.simple_spinner_item,
                     cat_name_list
             );
-            spRegistrationSelectCategory.setAdapter(Select_category);*/
+            spRegisterSelectCategory.setAdapter(Select_category);*/
         }
     }
 
@@ -294,7 +341,7 @@ public class RegistrationForm2 extends AppCompatActivity {
         @Override
         protected void onPreExecute() {
             pg = new ProgressDialog(RegistrationForm2.this);
-            pg.setTitle("Authentication...1");
+            pg.setTitle("Authentication...");
             pg.setMessage(Config.LoadingMsg);
             pg.show();
 
@@ -324,7 +371,7 @@ public class RegistrationForm2 extends AppCompatActivity {
                                     qty_type_list
                             );
 
-                            spRegistrationMeters.setAdapter(Select_category);
+                            spRegisterMeters.setAdapter(Select_category);
                             pg.dismiss();
 
                         } else {
@@ -357,5 +404,102 @@ public class RegistrationForm2 extends AppCompatActivity {
         }
     }
 
+    private class RegisterUser extends AsyncTask<Void, Integer, String> {
 
+        @Override
+        protected String doInBackground(Void... params) {
+            return uploadFile();
+        }
+
+        @SuppressWarnings("deprecation")
+        private String uploadFile() {
+            String responseString = null;
+
+            HttpClient httpclient = new DefaultHttpClient();
+            HttpPost httppost = new HttpPost(Config.BaseUrl + Config.UrlRegister);
+
+            try {
+                AndroidMultiPartEntity entity = new AndroidMultiPartEntity(
+                        new AndroidMultiPartEntity.ProgressListener() {
+
+                            @Override
+                            public void transferred(long num) {
+                                publishProgress((int) ((num / (float) totalSize) * 100));
+                            }
+                        });
+
+                if (!TextUtils.isEmpty(selectedFilePath)) {
+                    File sourceFile = new File(selectedFilePath);
+                    entity.addPart(Config.profileimage, new FileBody(sourceFile));
+                }
+
+                entity.addPart(Config.user, new StringBody(getIntent().getExtras().getString(Config.UserType)));
+                entity.addPart(Config.name, new StringBody(getIntent().getExtras().getString(Config.fName)));
+                entity.addPart(Config.surname, new StringBody(getIntent().getExtras().getString(Config.lName)));
+                entity.addPart(Config.Name_of_enterprise, new StringBody(getIntent().getExtras().getString(Config.nameOfEnterprice)));
+                entity.addPart(Config.gst_no, new StringBody(getIntent().getExtras().getString(Config.GstNo)));
+                entity.addPart(Config.pan_no, new StringBody(getIntent().getExtras().getString(Config.PanNo)));
+                entity.addPart(Config.adress1, new StringBody(edRegisterAddress1.getText().toString()));
+                entity.addPart(Config.area1, new StringBody(edRegisterArea1.getText().toString()));
+                entity.addPart(Config.pincode1, new StringBody(edRegisterPincode1.getText().toString()));
+                entity.addPart(Config.adress2, new StringBody(edRegisterAddress2.getText().toString()));
+                entity.addPart(Config.area2, new StringBody(edRegisterArea2.getText().toString()));
+                entity.addPart(Config.pincode2, new StringBody(edRegisterPincode2.getText().toString()));
+                entity.addPart(Config.emailid, new StringBody(getIntent().getExtras().getString(Config.Email)));
+                entity.addPart(Config.contactnumber1, new StringBody(edRegisterContactNo1.getText().toString()));
+                entity.addPart(Config.contactnumber2, new StringBody(edRegisterContactNo2.getText().toString()));
+                entity.addPart(Config.category, new StringBody("1"));
+                entity.addPart(Config.subcategory, new StringBody(edRegisterSubCategory.getText().toString()));
+                entity.addPart(Config.qty, new StringBody(edRegisterQuantity.getText().toString() + " " + spRegisterMeters.getSelectedItem().toString()));
+                entity.addPart(Config.Membership, new StringBody(MemberType.toLowerCase()));
+                entity.addPart(Config.password, new StringBody(getIntent().getExtras().getString(Config.password)));
+                entity.addPart(Config.Refferalcode, new StringBody(edRegisterReferralCode.getText().toString()));
+
+
+                totalSize = entity.getContentLength();
+                httppost.setEntity(entity);
+
+                HttpResponse response = httpclient.execute(httppost);
+                HttpEntity r_entity = response.getEntity();
+
+                int statusCode = response.getStatusLine().getStatusCode();
+                if (statusCode == 200) {
+                    responseString = EntityUtils.toString(r_entity);
+                    selectedFilePath = "";
+                    dialog.dismiss();
+                    System.out.println("Response : " + responseString);
+
+                } else {
+                    dialog.dismiss();
+                    responseString = "Error occurred! Http Status Code: " + statusCode;
+                }
+            } catch (ClientProtocolException e) {
+                responseString = e.toString();
+            } catch (IOException e) {
+                responseString = e.toString();
+            }
+            return responseString.trim();
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            Log.e(TAG, "Response from server: " + result);
+            JSONObject object = null;
+            try {
+                object = new JSONObject(result);
+
+                if (object.getString("STATUS").equalsIgnoreCase("true")) {
+                    Toast.makeText(RegistrationForm2.this, "" + object.getString("MESSAGE"), Toast.LENGTH_SHORT).show();
+                    startActivity(new Intent(getApplicationContext(),LoginActivity.class));
+                } else {
+                    Toast.makeText(RegistrationForm2.this, "" + object.getString("MESSAGE"), Toast.LENGTH_SHORT).show();
+
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            super.onPostExecute(result);
+        }
+
+    }
 }

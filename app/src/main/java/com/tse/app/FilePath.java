@@ -1,4 +1,4 @@
-package com.tse.app.Activity;
+package com.tse.app;
 
 import android.content.ContentUris;
 import android.content.Context;

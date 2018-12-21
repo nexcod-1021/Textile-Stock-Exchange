@@ -21,6 +21,7 @@
             android:src="@mipmap/logo" />
 
         <EditText
+            android:id="@+id/ed_login_username"
             style="@style/style_edittext"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -29,6 +30,7 @@
             android:inputType="text" />
 
         <EditText
+            android:id="@+id/ed_login_password"
             style="@style/style_edittext"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

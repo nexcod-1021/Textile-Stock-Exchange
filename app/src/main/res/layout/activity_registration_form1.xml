@@ -35,7 +35,6 @@
 
                 <EditText
                     android:id="@+id/edRegistrationfirstName"
-
                     style="@style/style_edittext"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

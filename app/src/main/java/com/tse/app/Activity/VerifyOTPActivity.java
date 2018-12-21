@@ -16,8 +16,8 @@ import android.widget.Toast;
 import com.tse.app.R;
 
 public class VerifyOTPActivity extends AppCompatActivity {
-    TextView TxtVerificationCode,TxtSendNumber;
-    EditText OptNumber1,OptNumber2,OptNumber3,OptNumber4;
+    TextView TxtVerificationCode, TxtSendNumber;
+    EditText edOtpNumber1, edOtpNumber2, edOtpNumber3, edOtpNumber4;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,40 +25,33 @@ public class VerifyOTPActivity extends AppCompatActivity {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_verify_otp);
         findViewBy_Id();
-        Toast.makeText(this,""+getIntent().getExtras().getString("mobile"), Toast.LENGTH_SHORT).show();
-        OptNumber1.addTextChangedListener(new TextWatcher() {
+        Toast.makeText(this, "" + getIntent().getExtras().getString("code"), Toast.LENGTH_SHORT).show();
+        TxtSendNumber.setText(TxtSendNumber.getText().toString() + " " + getIntent().getExtras().getString("mobile") + ")");
+
+        edOtpNumber1.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-
             }
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (OptNumber1.getText().toString().length() == 0) {
-                    OptNumber1.requestFocus();
-                }
-
-
-
-
+                if (edOtpNumber1.getText().toString().length() == 0) {
+                    edOtpNumber1.requestFocus();
+                }else VeryfyOtp();
             }
 
             @Override
             public void afterTextChanged(Editable s) {
-                if (OptNumber1.getText().toString().length() == 1)     //size as per your requirement
-                {
-                    OptNumber2.requestFocus();
-                }
-                else {
-                    OptNumber1.requestFocus();
-                }
+                if (edOtpNumber1.getText().toString().length() == 1){
 
-
+                    edOtpNumber2.requestFocus();
+                } else {
+                    edOtpNumber1.requestFocus();
+                }
             }
         });
 
-        OptNumber2.addTextChangedListener(new TextWatcher() {
+        edOtpNumber2.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
@@ -66,26 +59,24 @@ public class VerifyOTPActivity extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (OptNumber2.getText().toString().length() == 0) {
-                    OptNumber1.requestFocus();
-                }
+                if (edOtpNumber2.getText().toString().length() == 0) {
+                    edOtpNumber1.requestFocus();
+                }else VeryfyOtp();
 
             }
 
             @Override
             public void afterTextChanged(Editable s) {
-                if (OptNumber2.getText().toString().length() == 1)     //size as per your requirement
+                if (edOtpNumber2.getText().toString().length() == 1)     //size as per your requirement
                 {
-                    OptNumber3.requestFocus();
-                }else {
-                    OptNumber1.requestFocus();
+                    edOtpNumber3.requestFocus();
+                } else {
+                    edOtpNumber1.requestFocus();
                 }
-
-
             }
         });
 
-        OptNumber3.addTextChangedListener(new TextWatcher() {
+        edOtpNumber3.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
@@ -93,25 +84,23 @@ public class VerifyOTPActivity extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (OptNumber3.getText().toString().length() == 2) {
-                    OptNumber2.requestFocus();
-                }
+                if (edOtpNumber3.getText().toString().length() == 2) {
+                    edOtpNumber2.requestFocus();
+                }else VeryfyOtp();
             }
 
             @Override
             public void afterTextChanged(Editable s) {
-                if (OptNumber3.getText().toString().length() == 1)     //size as per your requirement
-                {
-                    OptNumber4.requestFocus();
-                }
-                else {
-                    OptNumber2.requestFocus();
+                if (edOtpNumber3.getText().toString().length() == 1) {
+                    edOtpNumber4.requestFocus();
+                } else {
+                    edOtpNumber2.requestFocus();
                 }
 
             }
         });
 
-        OptNumber4.addTextChangedListener(new TextWatcher() {
+        edOtpNumber4.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
@@ -119,46 +108,60 @@ public class VerifyOTPActivity extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (OptNumber4.getText().toString().length() == 0) {
-                    OptNumber3.requestFocus();
+                if (edOtpNumber4.getText().toString().length() == 0) {
+                    edOtpNumber3.requestFocus();
                 }
+                if (edOtpNumber4.getText().toString().length() == 1) {
+                    VeryfyOtp();
+                }
+
             }
 
             @Override
             public void afterTextChanged(Editable s) {
-                if (OptNumber4.getText().toString().length() == 1)     //size as per your requirement
-                {
-                    OptNumber4.requestFocus();
-                }else {
-                    OptNumber3.requestFocus();
+                if (edOtpNumber4.getText().toString().length() == 1){
+
+                    edOtpNumber4.requestFocus();
+                } else {
+                    edOtpNumber3.requestFocus();
                 }
 
             }
-
         });
+    }
 
+    private void VeryfyOtp() {
 
+        String enterOtpString = edOtpNumber1.getText().toString() + edOtpNumber2.getText().toString() + edOtpNumber3.getText().toString() + edOtpNumber4.getText().toString();
 
+        if(enterOtpString.length()==4) {
 
+            if (getIntent().getExtras().getString("code").equals(enterOtpString)) {
+                Intent intent = new Intent(getApplicationContext(), RegistrationForm1.class);
+                intent.putExtra("contact1", getIntent().getExtras().getString("mobile"));
+                startActivity(intent);
 
-
+            } else {
+                Toast.makeText(this, "Otp Does Not Verify", Toast.LENGTH_SHORT).show();
+            }
+        }
 
     }
 
     private void findViewBy_Id() {
         TxtVerificationCode = findViewById(R.id.TxtVerificationCode);
         TxtSendNumber = findViewById(R.id.TxtSendNumber);
-        OptNumber1 = findViewById(R.id.opt_num1);
-        OptNumber2 = findViewById(R.id.opt_num2);
-        OptNumber3 = findViewById(R.id.opt_num3);
-        OptNumber4 = findViewById(R.id.opt_num4);
-
+        edOtpNumber1 = findViewById(R.id.opt_num1);
+        edOtpNumber2 = findViewById(R.id.opt_num2);
+        edOtpNumber3 = findViewById(R.id.opt_num3);
+        edOtpNumber4 = findViewById(R.id.opt_num4);
     }
 
     public void register(View view) {
-        Intent intent = new Intent(VerifyOTPActivity.this,RegistrationForm1.class);
+        Intent intent = new Intent(VerifyOTPActivity.this, RegistrationForm1.class);
         startActivity(intent);
 
     }
+
 
 }

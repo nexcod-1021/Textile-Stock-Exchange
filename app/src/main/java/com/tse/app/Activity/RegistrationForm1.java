@@ -13,6 +13,8 @@ import android.widget.RadioButton;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.tse.app.Config;
+import com.tse.app.FilePath;
 import com.tse.app.R;
 
 public class RegistrationForm1 extends AppCompatActivity {
@@ -20,11 +22,13 @@ public class RegistrationForm1 extends AppCompatActivity {
     RadioButton rbRegisterManufature, rbRegisterTraders, rbRegisterService, rbRegisterBroker;
     EditText edRegistrationfirstName, edRegistrationLastName, edRegistrationEmail, edRegistrationPassword, edRegistrationCnfirmPassword, edRegistrationcEnterprice, edRegistrationGstNo, edRegistrationPanNo;
     ImageView ivProfileImage;
-
     ProgressDialog dialog;
     private int PICK_PDF_REQUEST = 1;
     private static final String TAG = EditProfileActivity.class.getSimpleName();
-    String selectedFilePath;
+    String selectedFilePath = "";
+    String UserType;
+    final String PASSWORD_PATTERN = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=\\S+$).{4,}$";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +36,7 @@ public class RegistrationForm1 extends AppCompatActivity {
         setContentView(R.layout.activity_registration_form1);
         findViewByIdS();
 
+        UserType = "M";
         rbRegisterManufature.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -39,7 +44,7 @@ public class RegistrationForm1 extends AppCompatActivity {
                 rbRegisterTraders.setChecked(false);
                 rbRegisterService.setChecked(false);
                 rbRegisterBroker.setChecked(false);
-
+                UserType = "M";
             }
         });
         rbRegisterTraders.setOnClickListener(new View.OnClickListener() {
@@ -49,6 +54,7 @@ public class RegistrationForm1 extends AppCompatActivity {
                 rbRegisterTraders.setChecked(true);
                 rbRegisterService.setChecked(false);
                 rbRegisterBroker.setChecked(false);
+                UserType = "T";
 
             }
         });
@@ -59,6 +65,7 @@ public class RegistrationForm1 extends AppCompatActivity {
                 rbRegisterTraders.setChecked(false);
                 rbRegisterService.setChecked(true);
                 rbRegisterBroker.setChecked(false);
+                UserType = "S";
             }
         });
         rbRegisterBroker.setOnClickListener(new View.OnClickListener() {
@@ -68,6 +75,7 @@ public class RegistrationForm1 extends AppCompatActivity {
                 rbRegisterTraders.setChecked(false);
                 rbRegisterService.setChecked(false);
                 rbRegisterBroker.setChecked(true);
+                UserType = "B";
             }
         });
 
@@ -99,11 +107,18 @@ public class RegistrationForm1 extends AppCompatActivity {
 
     public void MoveRegistrationform2(View view) {
         if (validation()) {
-
             Intent intent = new Intent(getApplicationContext(), RegistrationForm2.class);
+            intent.putExtra(Config.Contact1, getIntent().getExtras().getString("contact1"));
+            intent.putExtra(Config.profileUrl, selectedFilePath);
+            intent.putExtra(Config.fName, edRegistrationfirstName.getText().toString());
+            intent.putExtra(Config.lName, edRegistrationLastName.getText().toString());
+            intent.putExtra(Config.UserType, UserType);
+            intent.putExtra(Config.Email, edRegistrationEmail.getText().toString());
+            intent.putExtra(Config.nameOfEnterprice, edRegistrationcEnterprice.getText().toString());
+            intent.putExtra(Config.Password, edRegistrationCnfirmPassword.getText().toString());
+            intent.putExtra(Config.GstNo, edRegistrationGstNo.getText().toString());
+            intent.putExtra(Config.PanNo, edRegistrationPanNo.getText().toString());
             startActivity(intent);
-
-
         }
     }
 
@@ -114,14 +129,22 @@ public class RegistrationForm1 extends AppCompatActivity {
         } else if (edRegistrationLastName.getText().toString().length() == 0) {
             edRegistrationLastName.setError("Please enter Last Name");
             return false;
-        } else if (edRegistrationEmail.getText().toString().length() == 0) {
-            edRegistrationEmail.setError("Please enter Email");
-            return false;
-        } else if (!edRegistrationEmail.getText().toString().matches("^[a-zA-Z0-9_\\+-]+(\\.[a-zA-Z0-9_\\+-]+)*@[a-zA-Z0-9-]+(\\.[a-zA-Z0-9-]+)*\\.([a-zA-Z]{2,4})$")) {
-            edRegistrationEmail.setError("email not match");
-            return false;
+        }
+        //else if (edRegistrationEmail.getText().toString().length() == 0) {
+        //       edRegistrationEmail.setError("Please enter Email");
+        //      return false;
+        // }
+        //  else if (!edRegistrationEmail.getText().toString().matches("^[a-zA-Z0-9_\\+-]+(\\.[a-zA-Z0-9_\\+-]+)*@[a-zA-Z0-9-]+(\\.[a-zA-Z0-9-]+)*\\.([a-zA-Z]{2,4})$")) {
+        //      edRegistrationEmail.setError("email not match");
+        //     return false;
 
-
+        // }
+        else if (edRegistrationPassword.getText().toString().length() < 6) {
+            edRegistrationPassword.setError("password must be min 6 digit and atleast 1 capital and 1 digit required");
+            return false;
+        } else if (!edRegistrationPassword.getText().toString().matches(PASSWORD_PATTERN)) {
+            edRegistrationPassword.setError("password must be min 6 digit and atleast 1 capital and 1 digit required");
+            return false;
         } else if (edRegistrationPassword.getText().toString().length() == 0) {
             edRegistrationPassword.setError("Please enter Password");
             return false;
@@ -132,15 +155,17 @@ public class RegistrationForm1 extends AppCompatActivity {
         } else if (edRegistrationcEnterprice.getText().toString().length() == 0) {
             edRegistrationcEnterprice.setError("Please enter EnterPrice");
             return false;
-        } else if (edRegistrationGstNo.getText().toString().length() == 0) {
-            edRegistrationGstNo.setError("Please enter GST NO.");
-            return false;
+        }
+        // else if (edRegistrationGstNo.getText().toString().length() == 0) {
+        //     edRegistrationGstNo.setError("Please enter GST NO.");
+        //     return false;
 
-        } else if (edRegistrationPanNo.getText().toString().length() == 0) {
-            edRegistrationPanNo.setError("Please enter PAN NO.");
-            return false;
-
-        } else if (!edRegistrationPassword.getText().toString().equals(edRegistrationCnfirmPassword.getText().toString())) {
+        // }
+        // else if (edRegistrationPanNo.getText().toString().length() == 0) {
+        //     edRegistrationPanNo.setError("Please enter PAN NO.");
+        //     return false;
+        // }
+        else if (!edRegistrationPassword.getText().toString().equals(edRegistrationCnfirmPassword.getText().toString())) {
             edRegistrationCnfirmPassword.setError("password  not are match");
             return false;
         }
@@ -148,7 +173,6 @@ public class RegistrationForm1 extends AppCompatActivity {
     }
 
     private void showFileChooser() {
-
         Intent intent = new Intent();
         intent.setType("image/*");
         intent.setAction(Intent.ACTION_GET_CONTENT);

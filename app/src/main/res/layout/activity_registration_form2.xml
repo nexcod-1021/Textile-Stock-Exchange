@@ -36,7 +36,9 @@
             <EditText
                 android:id="@+id/edRegistrationPincode1"
                 style="@style/style_edittext"
+                android:maxLength="6"
                 android:layout_width="0dp"
+
                 android:layout_height="wrap_content"
                 android:layout_marginTop="0dp"
                 android:layout_weight="1"
@@ -74,6 +76,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="0dp"
                 android:layout_weight="1"
+                android:maxLength="6"
                 android:hint="Pincode 2"
                 android:inputType="number" />
 
@@ -91,6 +94,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="0dp"
                 android:layout_weight="1"
+                android:maxLength="10"
                 android:hint="Contact No.1"
                 android:inputType="number" />
 
@@ -100,6 +104,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="0dp"
+                android:maxLength="10"
                 android:layout_weight="1"
                 android:hint="Contact No.2"
                 android:inputType="number" />

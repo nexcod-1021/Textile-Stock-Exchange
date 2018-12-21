@@ -72,6 +72,7 @@ public class MobileRegisterActivity extends AppCompatActivity {
             pg.setTitle("Authentication...");
             pg.setMessage(Config.LoadingMsg);
             pg.show();
+
         }
 
         @Override

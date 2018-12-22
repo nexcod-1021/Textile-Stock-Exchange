@@ -156,12 +156,4 @@ public class VerifyOTPActivity extends AppCompatActivity {
         edOtpNumber3 = findViewById(R.id.opt_num3);
         edOtpNumber4 = findViewById(R.id.opt_num4);
     }
-
-    public void register(View view) {
-        Intent intent = new Intent(VerifyOTPActivity.this, RegistrationForm1.class);
-        startActivity(intent);
-
-    }
-
-
 }

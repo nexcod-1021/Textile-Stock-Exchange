@@ -63,6 +63,10 @@ public class LoginActivity extends AppCompatActivity {
         startActivity(new Intent(getApplicationContext(), ForgotPasswordActivity.class));
     }
 
+    public void moveToRegistration(View view) {
+        startActivity(new Intent(getApplicationContext(), MobileRegisterActivity.class));
+    }
+
     private class LoginData extends AsyncTask<Void, Void, Void> {
 
         @Override
@@ -88,6 +92,7 @@ public class LoginActivity extends AppCompatActivity {
                                     Toast.makeText(LoginActivity.this, ""+j.getString("MESSAGE"), Toast.LENGTH_SHORT).show();
                                     pg.dismiss();
                                     System.out.println("" + j.getString("MESSAGE"));
+                                    startActivity(new Intent(new Intent(getApplicationContext(),EditProfileActivity.class)));
 
                                 } else {
                                     Toast.makeText(getApplicationContext(), "" + j.getString("MESSAGE"), Toast.LENGTH_SHORT).show();

@@ -24,7 +24,7 @@
             android:layout_height="120dp"
             android:layout_marginBottom="10dp"
             android:src="@mipmap/verification_ic"
-            android:onClick="register"/>
+           />
 
         <TextView
             android:id="@+id/TxtVerificationCode"

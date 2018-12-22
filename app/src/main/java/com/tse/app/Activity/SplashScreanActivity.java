@@ -30,18 +30,6 @@ public class SplashScreanActivity extends AppCompatActivity {
         setContentView(R.layout.activity_splash_screan);
         startService(new Intent(getBaseContext(), MyService.class));
 
-
-        handler=new Handler();
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-
-                Intent intent=new Intent(SplashScreanActivity.this,MobileRegisterActivity.class);
-                startActivity(intent);
-                finish();
-            }
-        },2500);
-
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             requestPermission();
         } else {
@@ -78,10 +66,10 @@ public class SplashScreanActivity extends AppCompatActivity {
 
     private void moveIntent() {
         if (sharedPreferencesRemember.getString(Config.spPriceGeneral, "").equalsIgnoreCase("")) {
-            startActivity(new Intent(getApplicationContext(), MobileRegisterActivity.class));
+            startActivity(new Intent(getApplicationContext(), LoginActivity.class));
             finish();
         } else {
-            startActivity(new Intent(getApplicationContext(), MobileRegisterActivity.class));
+            startActivity(new Intent(getApplicationContext(), LoginActivity.class));
             finish();
         }
     }

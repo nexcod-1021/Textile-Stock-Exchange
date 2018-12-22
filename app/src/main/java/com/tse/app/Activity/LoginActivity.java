@@ -92,7 +92,7 @@ public class LoginActivity extends AppCompatActivity {
                                     Toast.makeText(LoginActivity.this, ""+j.getString("MESSAGE"), Toast.LENGTH_SHORT).show();
                                     pg.dismiss();
                                     System.out.println("" + j.getString("MESSAGE"));
-                                    startActivity(new Intent(new Intent(getApplicationContext(),EditProfileActivity.class)));
+                                    startActivity(new Intent(new Intent(getApplicationContext(),HomeActivity.class)));
 
                                 } else {
                                     Toast.makeText(getApplicationContext(), "" + j.getString("MESSAGE"), Toast.LENGTH_SHORT).show();

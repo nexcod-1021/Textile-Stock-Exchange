@@ -1,6 +1,7 @@
 package com.tse.app.Activity;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.design.widget.NavigationView;
@@ -15,6 +16,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.tse.app.Fragment.AboutUsFragment;
@@ -31,6 +33,7 @@ public class HomeActivity extends AppCompatActivity
 
     boolean doubleBackToExitPressedOnce = false;
     Fragment fragment = null;
+    ImageView img_Menu_Profile;
 
 
     @SuppressLint("NewApi")
@@ -41,6 +44,17 @@ public class HomeActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        View headerView = navigationView.getHeaderView(0);
+        ImageView imgMenuProfile = (ImageView)headerView.findViewById(R.id.img_Menu_Profile);
+        imgMenuProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent= new Intent(HomeActivity.this,EditProfileActivity.class);
+                startActivity(intent);
+            }
+        });
+
+
         final DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
 
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -52,6 +66,7 @@ public class HomeActivity extends AppCompatActivity
         toggle.getDrawerArrowDrawable().setColor(getResources().getColor(R.color.colorwhite));
         toggle.setDrawerIndicatorEnabled(false);
         toggle.setHomeAsUpIndicator(R.mipmap.menu_ic);
+
 
         toggle.setToolbarNavigationClickListener(new View.OnClickListener() {
             @Override

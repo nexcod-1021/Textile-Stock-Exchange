@@ -12,6 +12,7 @@
         android:layout_height="match_parent"
         android:layout_gravity="center"
         android:gravity="center"
+        android:layout_marginTop="10dp"
         android:orientation="horizontal"
         android:padding="5dp">
 
@@ -19,10 +20,11 @@
             android:id="@+id/img_Menu_Profile"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:layout_weight="1"
+            android:layout_margin="10dp"
             android:src="@color/colorsigleline"
             app:civ_border_color="#fff"
-            app:civ_border_width="2dp" />
+            app:civ_border_width="2dp"
+          />
 
         <LinearLayout
             android:layout_width="wrap_content"

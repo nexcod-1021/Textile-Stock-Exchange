@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Fragment.EditProfileBuyerFragment">
+    tools:context=".Fragment.EditProfileProfileFragment">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -12,9 +12,9 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_marginTop="35dp"
             android:orientation="vertical"
-            android:padding="20dp"
-            android:layout_marginTop="35dp">
+            android:padding="20dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -28,6 +28,7 @@
                     android:layout_weight="1">
 
                     <EditText
+                        android:id="@+id/edProfilefname"
                         style="@style/style_edittext"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -41,6 +42,7 @@
                     android:layout_weight="1">
 
                     <EditText
+                        android:id="@+id/edProfilelname"
                         style="@style/style_edittext"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -53,6 +55,7 @@
                 android:layout_height="wrap_content">
 
                 <EditText
+                    android:id="@+id/edProfileUserType"
                     style="@style/style_edittext"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -65,6 +68,7 @@
                 android:layout_height="wrap_content">
 
                 <EditText
+                    android:id="@+id/edProfileEmail"
                     style="@style/style_edittext"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -73,12 +77,12 @@
             </android.support.design.widget.TextInputLayout>
 
 
-
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
                 <EditText
+                    android:id="@+id/edProfileEnterPrise"
                     style="@style/style_edittext"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -98,6 +102,7 @@
                     android:layout_weight="1">
 
                     <EditText
+                        android:id="@+id/edProfileGSTno"
                         style="@style/style_edittext"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -111,6 +116,7 @@
                     android:layout_weight="1">
 
                     <EditText
+                        android:id="@+id/edProfilePanNo"
                         style="@style/style_edittext"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -123,6 +129,7 @@
                 android:layout_height="wrap_content">
 
                 <EditText
+                    android:id="@+id/edProfileAdress1"
                     style="@style/style_edittext"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -140,7 +147,8 @@
                     android:layout_marginRight="5dp"
                     android:layout_weight="1">
 
-                    <EditText
+                    <AutoCompleteTextView
+                        android:id="@+id/autoProfileArea1"
                         style="@style/style_edittext"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -154,6 +162,7 @@
                     android:layout_weight="1">
 
                     <EditText
+                        android:id="@+id/edProfilePincode1"
                         style="@style/style_edittext"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -166,6 +175,7 @@
                 android:layout_height="wrap_content">
 
                 <EditText
+                    android:id="@+id/edProfileAdress2"
                     style="@style/style_edittext"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -183,7 +193,8 @@
                     android:layout_marginRight="5dp"
                     android:layout_weight="1">
 
-                    <EditText
+                    <AutoCompleteTextView
+                        android:id="@+id/autoProfileArea2"
                         style="@style/style_edittext"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -197,6 +208,7 @@
                     android:layout_weight="1">
 
                     <EditText
+                        android:id="@+id/edProfilePincode2"
                         style="@style/style_edittext"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -216,11 +228,12 @@
                     android:layout_weight="1">
 
                     <EditText
+                        android:id="@+id/edProfileContactNo1"
                         style="@style/style_edittext"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="Contact No. 1"
-                        android:editable="false"/>
+                        android:editable="false"
+                        android:hint="Contact No. 1" />
                 </android.support.design.widget.TextInputLayout>
 
                 <android.support.design.widget.TextInputLayout
@@ -230,6 +243,7 @@
                     android:layout_weight="1">
 
                     <EditText
+                        android:id="@+id/edProfileContactNo2"
                         style="@style/style_edittext"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -238,12 +252,12 @@
             </LinearLayout>
 
 
-
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
                 <EditText
+                    android:id="@+id/edProfileReferralcode"
                     style="@style/style_edittext"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -273,42 +287,42 @@
                     android:orientation="horizontal">
 
                     <RadioButton
-                        android:id="@+id/rbRegistrationGeneral"
+                        android:id="@+id/rbProfileGeneral"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:buttonTint="@color/colorPrimary"
-                        android:checked="true"
+                        android:clickable="false"
                         android:fontFamily="@font/semibold"
                         android:padding="10dp"
                         android:text="General"
-                        android:textSize="16dp"
-                        android:editable="false"/>
+                        android:textSize="16dp" />
 
                     <RadioButton
-                        android:id="@+id/rbRegistrationPrime"
+                        android:id="@+id/rbProfilePrime"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:buttonTint="@color/colorPrimary"
                         android:checked="false"
+                        android:clickable="false"
                         android:fontFamily="@font/semibold"
                         android:padding="10dp"
                         android:text="Prime"
-                        android:textSize="16dp"
-                        android:editable="false"/>
+                        android:textSize="16dp" />
 
                 </RadioGroup>
             </LinearLayout>
+
             <Button
                 android:id="@+id/btnMobileRegister"
                 style="@style/style_button"
                 android:layout_width="250dp"
-                android:layout_gravity="center"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center"
                 android:layout_marginTop="50dp"
-                android:text="save"
-                android:layout_marginBottom="50dp"/>
+                android:layout_marginBottom="50dp"
+                android:text="save" />
 
 
         </LinearLayout>

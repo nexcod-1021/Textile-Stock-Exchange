@@ -2,7 +2,9 @@ package com.tse.app.Activity;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -22,6 +24,7 @@ import com.android.volley.toolbox.Volley;
 import com.tse.app.Config;
 import com.tse.app.R;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -32,6 +35,8 @@ public class LoginActivity extends AppCompatActivity {
     EditText edUserName, edPassword;
     Button btnSubmit;
     ProgressDialog pg;
+    SharedPreferences sharedPreferences;
+   SharedPreferences.Editor editor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,10 +44,13 @@ public class LoginActivity extends AppCompatActivity {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_login);
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(LoginActivity.this);
+
         findViewByIds();
 
         edUserName.setText("TSET00022");
         edPassword.setText("123456");
+
 
         btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -87,12 +95,54 @@ public class LoginActivity extends AppCompatActivity {
                             try {
                                 JSONObject j = new JSONObject(response);
                                 System.out.println("User Login : " + response);
+
                                 if (j.getString("STATUS").equalsIgnoreCase("true")) {
                                     Toast.makeText(LoginActivity.this, "success", Toast.LENGTH_SHORT).show();
                                     Toast.makeText(LoginActivity.this, ""+j.getString("MESSAGE"), Toast.LENGTH_SHORT).show();
                                     pg.dismiss();
                                     System.out.println("" + j.getString("MESSAGE"));
-                                    startActivity(new Intent(new Intent(getApplicationContext(),HomeActivity.class)));
+                                    String response1 = j.getString("response");
+
+
+
+                                    JSONArray arr = new JSONArray(response1);
+                                    for (int i = 0; i < arr.length(); i++) {
+                                        JSONObject jsonProductObject = arr.getJSONObject(i);
+                                        editor = sharedPreferences.edit();
+                                        editor.putString(Config.Sharedprefuser_id, jsonProductObject.getString("user_id"));
+                                        editor.putString(Config.SharedprefTSE_id, jsonProductObject.getString("TSE_id"));
+                                        editor.putString(Config.Sharedprefprofileimage, jsonProductObject.getString("profileimage"));
+                                        editor.putString(Config.Sharedprefname, jsonProductObject.getString("name"));
+                                        editor.putString(Config.Sharedprefsurname, jsonProductObject.getString("surname"));
+                                        editor.putString(Config.SharedprefName_of_enterprise, jsonProductObject.getString("Name_of_enterprise"));
+                                        editor.putString(Config.Sharedprefgst_no, jsonProductObject.getString("gst_no"));
+                                        editor.putString(Config.Sharedprefpan_no, jsonProductObject.getString("pan_no"));
+                                        editor.putString(Config.Sharedprefadress1, jsonProductObject.getString("adress1"));
+                                        editor.putString(Config.Sharedprefarea1, jsonProductObject.getString("area1"));
+                                        editor.putString(Config.Sharedprefpincode1, jsonProductObject.getString("pincode1"));
+                                        editor.putString(Config.SharedprefAdress2, jsonProductObject.getString("Adress2"));
+                                        editor.putString(Config.Sharedprefarea2, jsonProductObject.getString("area2"));
+                                        editor.putString(Config.Sharedprefpincode2, jsonProductObject.getString("pincode2"));
+                                        editor.putString(Config.Sharedprefemailid, jsonProductObject.getString("emailid"));
+                                        editor.putString(Config.Sharedprefpassword, jsonProductObject.getString("password"));
+                                        editor.putString(Config.Sharedprefcontactnumber1, jsonProductObject.getString("contactnumber1"));
+                                        editor.putString(Config.Sharedprefcontactnumber2, jsonProductObject.getString("contactnumber2"));
+                                        editor.putString(Config.Sharedprefcategory, jsonProductObject.getString("category"));
+                                        editor.putString(Config.Sharedprefsubcategory, jsonProductObject.getString("subcategory"));
+                                        editor.putString(Config.SharedprefQty, jsonProductObject.getString("Qty"));
+                                        editor.putString(Config.SharedprefMembership, jsonProductObject.getString("Membership"));
+                                        editor.putString(Config.Sharedprefsubscription_startdate, jsonProductObject.getString("subscription_startdate"));
+                                        editor.putString(Config.Sharedprefsubscription_enddate, jsonProductObject.getString("subscription_enddate"));
+                                        editor.putString(Config.SharedprefRefferalcode, jsonProductObject.getString("Refferalcode"));
+                                        editor.putString(Config.Sharedprefcash_bak, jsonProductObject.getString("cash_bak"));
+
+
+                                    }
+
+                                    editor.commit();
+                                    finish();
+                                    Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
+                                    startActivity(intent);
 
                                 } else {
                                     Toast.makeText(getApplicationContext(), "" + j.getString("MESSAGE"), Toast.LENGTH_SHORT).show();

@@ -9,14 +9,10 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
-import android.widget.ImageView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.tse.app.Adapter.Pager_Editprofile;
-import com.tse.app.Adapter.Pager_Mainservice;
 import com.tse.app.FilePath;
 import com.tse.app.R;
 
@@ -31,11 +27,14 @@ public class EditProfileActivity extends AppCompatActivity implements TabLayout.
     private TabLayout tabLayout;
     private ViewPager viewPager;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_profile);
-        getSupportActionBar().hide();
+
+        getSupportActionBar().setElevation(0);
+
 
         findViewByIdS();
 
@@ -47,8 +46,8 @@ public class EditProfileActivity extends AppCompatActivity implements TabLayout.
         });
 
         tabLayout = (TabLayout) findViewById(R.id.tabLayout);
-        tabLayout.addTab(tabLayout.newTab().setText("buyer"));
-        tabLayout.addTab(tabLayout.newTab().setText("seller"));
+        tabLayout.addTab(tabLayout.newTab().setText("Profile"));
+        tabLayout.addTab(tabLayout.newTab().setText("Category"));
 
 
         for (int i = 0; i < tabLayout.getTabCount(); i++) {
@@ -130,5 +129,10 @@ public class EditProfileActivity extends AppCompatActivity implements TabLayout.
     @Override
     public void onTabReselected(TabLayout.Tab tab) {
 
+    }
+
+    public void backToHome(View view) {
+        Intent intent = new Intent(EditProfileActivity.this,HomeActivity.class);
+        startActivity(intent);
     }
 }

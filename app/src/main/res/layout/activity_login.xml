@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@mipmap/bg"
     android:gravity="center"
     tools:context=".Activity.LoginActivity">
@@ -28,7 +29,13 @@
             android:layout_marginTop="40dp"
             android:hint="Username"
             android:inputType="text" />
-
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColorHint="@color/colorsigleline"
+            app:hintEnabled="false"
+            app:passwordToggleEnabled="true"
+            app:passwordToggleTint="@color/colorPrimary">
         <EditText
             android:id="@+id/ed_login_password"
             style="@style/style_edittext"
@@ -37,9 +44,11 @@
             android:layout_marginTop="0dp"
             android:hint="Password"
             android:inputType="textPassword" />
+        </android.support.design.widget.TextInputLayout>
 
 
         <Button
+            android:layout_marginTop="40dp"
             android:id="@+id/btnMobileRegister"
             style="@style/style_button"
             android:layout_width="match_parent"

@@ -1,111 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:orientation="vertical"
-    android:layout_height="match_parent">
 
-    <LinearLayout
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:elevation="0dp"
+    android:orientation="vertical"
+    tools:context=".Activity.EditProfileActivity">
+
+    <RelativeLayout
+        android:id="@+id/rv_profile"
+        android:layout_width="match_parent"
+        android:layout_height="155dp"
+        android:background="@color/colorPrimary">
+
+        <android.support.design.widget.TabLayout
+            android:id="@+id/tabLayout"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:background="?attr/colorPrimary"
+            android:layout_alignParentBottom="true"
+            android:minHeight="?attr/actionBarSize"
+            android:paddingBottom="0.5dp"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+            app:tabIconTintMode="multiply"
+            app:tabIndicatorColor="@android:color/white"
+            app:tabIndicatorHeight="3dp"
+            app:tabMinWidth="50dp"
+            app:tabMode="fixed"
+            app:tabSelectedTextColor="@color/colorwhite"
+            app:tabTextColor="@color/colorBlack" />
+    </RelativeLayout>
+
+    <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/cv_profile_image"
+        android:layout_width="110dp"
+        android:layout_height="110dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="100dp"
+        android:src="@color/colorAccent"
+        app:civ_border_color="#FFFFFF"
+        app:civ_border_width="6dp" />
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/pager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
-
-        <RelativeLayout
-
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <RelativeLayout
-                    android:id="@+id/profile"
-                    android:layout_width="match_parent"
-                    android:layout_height="120dp"
-                    android:background="@color/colorPrimary">
+        android:layout_below="@id/rv_profile" />
 
 
+</RelativeLayout>
 
-                    <!-- View pager to swipe views -->
-
-                    <ImageView
-                        android:padding="10dp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/ic_arrow_back"
-                        android:layout_marginTop="10dp"/>
-
-                    <TextView
-                        android:paddingTop="10dp"
-                        style="@style/style_textview"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerHorizontal="true"
-                        android:fontFamily="@font/semibold"
-                        android:text="Edit Profile"
-                        android:textColor="@color/colorwhite"
-                        android:textSize="18dp"
-                        android:layout_marginTop="10dp"/>
-
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentRight="true"
-
-                        android:visibility="gone"
-                        android:src="@mipmap/save_ic"
-                        android:layout_marginTop="10dp"/>
-                    <android.support.v7.widget.Toolbar
-                        android:id="@+id/toolbar"
-                        android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:elevation="0dp"
-                        android:background="?attr/colorPrimary"
-                        android:minHeight="?attr/actionBarSize"
-                        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-                        app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
-
-                    <android.support.design.widget.TabLayout
-                        android:id="@+id/tabLayout"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentBottom="true"
-                        android:layout_centerHorizontal="true"
-                        android:background="?attr/colorPrimary"
-                        android:minHeight="?attr/actionBarSize"
-                        android:paddingBottom="0.5dp"
-                        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-                        app:tabIndicatorColor="@android:color/white"
-                        app:tabIndicatorHeight="3dp"
-                        app:tabMode="fixed"
-                        app:tabMinWidth="50dp"
-                        app:tabSelectedTextColor="@color/colorwhite"
-                        app:tabTextColor="@color/colorBlack"
-                        app:tabIconTintMode="multiply" />
-                </RelativeLayout>
-
-                <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
-                    android:id="@+id/cv_profile_image"
-                    android:layout_width="110dp"
-                    android:layout_height="110dp"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginTop="65dp"
-                    android:src="@color/colorAccent"
-                    app:civ_border_color="#FFFFFF"
-                    app:civ_border_width="6dp" />
-                <android.support.v4.view.ViewPager
-                    android:id="@+id/pager"
-                    android:layout_below="@id/profile"
-                    android:layout_width="match_parent"
-                    android:layout_height="fill_parent" />
-
-            </RelativeLayout>
-
-        </RelativeLayout>
-
-
-    </LinearLayout>
-</LinearLayout>

@@ -156,7 +156,13 @@
                     android:hint="Email"
                     android:inputType="textEmailAddress" />
 
-
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColorHint="@color/colorsigleline"
+                    app:hintEnabled="false"
+                    app:passwordToggleEnabled="true"
+                    app:passwordToggleTint="@color/colorPrimary">
                 <EditText
                     android:id="@+id/edRegistrationPassword"
                     style="@style/style_edittext"
@@ -165,7 +171,14 @@
                     android:layout_marginTop="0dp"
                     android:hint="Password"
                     android:inputType="textPassword" />
-
+                </android.support.design.widget.TextInputLayout>
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColorHint="@color/colorsigleline"
+                    app:hintEnabled="false"
+                    app:passwordToggleEnabled="true"
+                    app:passwordToggleTint="@color/colorPrimary">
                 <EditText
                     android:id="@+id/edRegistrationCnfirmPassword"
                     style="@style/style_edittext"
@@ -174,6 +187,7 @@
                     android:layout_marginTop="0dp"
                     android:hint="Confirm Password"
                     android:inputType="textPassword" />
+                </android.support.design.widget.TextInputLayout>
 
                 <EditText
                     android:id="@+id/edRegistrationcEnterprice"

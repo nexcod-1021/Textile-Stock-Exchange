@@ -29,6 +29,7 @@
                 android:padding="5dp">
 
                 <TextView
+
                     style="@style/style_textview"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -37,6 +38,7 @@
                     android:textColor="@color/colorsigleline" />
 
                 <TextView
+                    android:id="@+id/TxtOrderDeatailCode"
                     style="@style/style_textview"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -57,6 +59,7 @@
                 android:padding="5dp">
 
                 <TextView
+
                     style="@style/style_textview"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -65,6 +68,7 @@
                     android:textColor="@color/colorsigleline" />
 
                 <TextView
+                    android:id="@+id/TxtOrderDetailProduct"
                     style="@style/style_textview"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -85,6 +89,7 @@
                 android:padding="5dp">
 
                 <TextView
+
                     style="@style/style_textview"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -93,6 +98,7 @@
                     android:textColor="@color/colorsigleline" />
 
                 <TextView
+                    android:id="@+id/TxtOrderDetailCategory"
                     style="@style/style_textview"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -113,6 +119,7 @@
                 android:padding="5dp">
 
                 <TextView
+
                     style="@style/style_textview"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -121,6 +128,7 @@
                     android:textColor="@color/colorsigleline" />
 
                 <TextView
+                    android:id="@+id/TxtOrderDetailSubCategory"
                     style="@style/style_textview"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -141,6 +149,7 @@
                 android:padding="5dp">
 
                 <TextView
+
                     style="@style/style_textview"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -149,6 +158,7 @@
                     android:textColor="@color/colorsigleline" />
 
                 <TextView
+                    android:id="@+id/TxtOrderDetailCity"
                     style="@style/style_textview"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -169,6 +179,7 @@
                 android:padding="5dp">
 
                 <TextView
+
                     style="@style/style_textview"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -177,6 +188,7 @@
                     android:textColor="@color/colorsigleline" />
 
                 <TextView
+                    android:id="@+id/TxtOrderDetailArea"
                     style="@style/style_textview"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -205,6 +217,7 @@
                     android:textColor="@color/colorsigleline" />
 
                 <TextView
+                    android:id="@+id/TxtOrderDetailDiemension"
                     style="@style/style_textview"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -225,6 +238,7 @@
                 android:padding="5dp">
 
                 <TextView
+
                     style="@style/style_textview"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -233,6 +247,7 @@
                     android:textColor="@color/colorsigleline" />
 
                 <TextView
+                    android:id="@+id/TxtOrderDetailGSM"
                     style="@style/style_textview"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -261,6 +276,7 @@
                     android:textColor="@color/colorsigleline" />
 
                 <TextView
+                    android:id="@+id/TxtOrderDetailColour"
                     style="@style/style_textview"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -289,6 +305,7 @@
                     android:textColor="@color/colorsigleline" />
 
                 <TextView
+                    android:id="@+id/TxtOrderDetailRemark"
                     style="@style/style_textview"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -317,6 +334,7 @@
                     android:textColor="@color/colorsigleline" />
 
                 <TextView
+                    android:id="@+id/TxtOrderDetailQuality"
                     style="@style/style_textview"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -345,6 +363,35 @@
                     android:textColor="@color/colorsigleline" />
 
                 <TextView
+                    android:id="@+id/TxtOrderDetailPaymentTerms"
+                    style="@style/style_textview"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="CD123345" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/colorsigleline">
+
+            </View>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="5dp">
+
+                <TextView
+                    style="@style/style_textview"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Status:"
+                    android:textColor="@color/colorsigleline" />
+
+                <TextView
+                    android:id="@+id/TxtOrderDetailStatus"
                     style="@style/style_textview"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -361,18 +408,21 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="50dp"
                 android:gravity="center"
+                android:layout_gravity="center"
                 android:orientation="horizontal"
-                android:layout_marginBottom="20dp">
+                android:layout_marginBottom="30dp">
 
                 <Button
                     android:id="@+id/btnBuyerOffer"
                     style="@style/style_button"
+                    android:background="@drawable/small_button_background"
                     android:layout_width="130dp"
                     android:layout_height="40dp"
                     android:layout_marginRight="15dp"
+                    android:padding="0dp"
                     android:text="offer" />
 
                 <Button
@@ -380,7 +430,8 @@
                     android:layout_width="130dp"
                     android:layout_height="40dp"
                     android:background="@drawable/buttonring_background"
-                    android:text="offer"
+                    android:text="ok"
+                    android:padding="0dp"
                     android:textColor="@color/colorPrimary" />
             </LinearLayout>
 

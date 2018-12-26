@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginTop="5dp"
-    android:padding="5dp">
+    app:layout_behavior="android.support.design.widget.BottomSheetBehavior">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@drawable/card_bg"
         android:orientation="vertical"
-        android:padding="20dp"
-        android:background="@drawable/card_bg">
+        android:padding="10dp">
 
         <LinearLayout
-
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
@@ -22,54 +22,39 @@
                 style="@style/style_textview"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="bottom"
-                android:text="Code -"
+                android:text="Category -"
                 android:textColor="@color/colorsigleline"
                 android:textSize="14sp" />
 
             <TextView
-                android:id="@+id/TxtOrderCode"
+                android:id="@+id/TxtProfileSelect_Category"
                 style="@style/style_textview"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_gravity="bottom"
                 android:layout_weight="1"
                 android:fontFamily="@font/semibold"
                 android:paddingLeft="10dp"
-                android:text="Code"
+                android:text="Print Saree"
                 android:textSize="14sp" />
 
-            <Button
-                android:id="@+id/btnViewDetail"
-                android:layout_width="wrap_content"
-                android:layout_height="35dp"
-                android:background="@drawable/button_background"
-                android:fontFamily="@font/semibold"
-                android:padding="0dp"
-                android:paddingLeft="10dp"
-                android:paddingRight="10dp"
-                android:text="View Detail"
-                android:textAllCaps="false"
-                android:textColor="@color/colorwhite"
-                android:textSize="14sp" />
+
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="7dp"
             android:orientation="horizontal">
 
             <TextView
                 style="@style/style_textview"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:text="Product Name -"
+                android:text="Sub Category -"
                 android:textColor="@color/colorsigleline"
                 android:textSize="14sp" />
 
             <TextView
-                android:id="@+id/TxtOrderProduct"
+                android:id="@+id/TxtProfileSub_Category"
                 style="@style/style_textview"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
@@ -85,59 +70,27 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="7dp"
             android:orientation="horizontal">
 
             <TextView
                 style="@style/style_textview"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:text="Category -"
+                android:text="Quentity -"
                 android:textColor="@color/colorsigleline"
                 android:textSize="14sp" />
 
             <TextView
-                android:id="@+id/TxtOrderCategory"
+                android:id="@+id/TxtProfileQty"
                 style="@style/style_textview"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:fontFamily="@font/semibold"
                 android:paddingLeft="10dp"
-                android:text="Plan Fabrics"
+                android:text="Print Saree"
                 android:textSize="14sp" />
-
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="7dp"
-            android:orientation="horizontal">
-
-            <TextView
-                style="@style/style_textview"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:text="Sub Category -"
-                android:textColor="@color/colorsigleline"
-                android:textSize="14sp" />
-
-            <TextView
-                android:id="@+id/TxtOrderSubCategory"
-                style="@style/style_textview"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:fontFamily="@font/semibold"
-                android:paddingLeft="10dp"
-                android:text="Fabrics"
-                android:textSize="14sp" />
-
         </LinearLayout>
 
     </LinearLayout>
-
-
-</android.support.v7.widget.CardView>
+</LinearLayout>

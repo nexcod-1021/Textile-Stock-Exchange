@@ -16,10 +16,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
+
         tools:ignore="GoogleAppIndexingWarning">
         <activity
             android:name=".Activity.SplashScreanActivity"
-            android:theme="@style/no_actionbar">
+            android:theme="@style/no_actionbar"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -29,24 +31,34 @@
         </activity>
         <activity
             android:name=".Activity.MobileRegisterActivity"
-            android:theme="@style/no_actionbar" />
+            android:theme="@style/no_actionbar"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".Activity.VerifyOTPActivity"
             android:theme="@style/no_actionbar"
-            android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".Activity.RegistrationForm1"
             android:label="Registration"
             android:parentActivityName=".Activity.VerifyOTPActivity"
-            android:windowSoftInputMode="stateAlwaysHidden" >
+            android:windowSoftInputMode="stateAlwaysHidden"
+            android:screenOrientation="portrait">
 
         </activity>
+        <activity android:name=".Activity.BuyerDetailActivity"
+            android:label="Detail"
+            android:theme="@style/AppTheme"
+            android:parentActivityName=".Activity.HomeActivity"
+            android:windowSoftInputMode="stateAlwaysHidden"
+            android:screenOrientation="portrait"/>
 
         <activity
             android:name=".Activity.RegistrationForm2"
             android:label="Registration"
             android:parentActivityName=".Activity.RegistrationForm1"
-            android:windowSoftInputMode="stateAlwaysHidden" >
+            android:windowSoftInputMode="stateAlwaysHidden"
+            android:screenOrientation="portrait">
 
 
         </activity>
@@ -54,19 +66,25 @@
             android:name=".Activity.LoginActivity"
             android:theme="@style/no_actionbar"
             android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
-        <activity android:name=".Activity.ForgotPasswordActivity" />
+        <activity android:name=".Activity.ForgotPasswordActivity"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".Activity.EditProfileActivity"
-            android:windowSoftInputMode="stateAlwaysHidden" >
+            android:label="Edit Profile"
+            android:parentActivityName=".Activity.HomeActivity"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan"
+            android:screenOrientation="portrait">
 
         </activity>
         <activity
             android:name=".Activity.HomeActivity"
             android:theme="@style/AppTheme.NoActionBar"
-            android:windowSoftInputMode="stateAlwaysHidden" />
+            android:windowSoftInputMode="stateAlwaysHidden"
+            android:screenOrientation="portrait"/>
         <activity android:name=".Activity.ChangePasswordActivity"
             android:theme="@style/AppTheme.NoActionBar"
-            android:windowSoftInputMode="stateAlwaysHidden">
+            android:windowSoftInputMode="stateAlwaysHidden"
+            android:screenOrientation="portrait">
         </activity>
         <service android:name=".MyService"
             android:enabled="true">

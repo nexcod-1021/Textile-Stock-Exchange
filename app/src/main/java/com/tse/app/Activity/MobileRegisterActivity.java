@@ -46,6 +46,8 @@ public class MobileRegisterActivity extends AppCompatActivity {
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(MobileRegisterActivity.this);
         editor = sharedPreferences.edit();
 
+
+
         btnMobileRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -10,6 +10,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Toast;
+
 import com.tse.app.Config;
 import com.tse.app.MyService;
 import com.tse.app.R;
@@ -28,6 +30,8 @@ public class SplashScreanActivity extends AppCompatActivity {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_splash_screan);
+        sharedPreferencesRemember = PreferenceManager.getDefaultSharedPreferences(SplashScreanActivity.this);
+
         startService(new Intent(getBaseContext(), MyService.class));
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -56,6 +60,7 @@ public class SplashScreanActivity extends AppCompatActivity {
                 @Override
                 public void run() {
 
+
                     moveIntent();
                 }
             }, SPLASH_TIME_OUT);
@@ -65,8 +70,9 @@ public class SplashScreanActivity extends AppCompatActivity {
     }
 
     private void moveIntent() {
-        if (sharedPreferencesRemember.getString(Config.spPriceGeneral, "").equalsIgnoreCase("")) {
-            startActivity(new Intent(getApplicationContext(), LoginActivity.class));
+
+        if (!sharedPreferencesRemember.getString(Config.Sharedprefuser_id, "").equalsIgnoreCase("")) {
+            startActivity(new Intent(getApplicationContext(), HomeActivity.class));
             finish();
         } else {
             startActivity(new Intent(getApplicationContext(), LoginActivity.class));

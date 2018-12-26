@@ -5,11 +5,8 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
-import com.tse.app.Fragment.BuyerFragment;
-import com.tse.app.Fragment.EditProfileBuyerFragment;
-import com.tse.app.Fragment.EditProfileSellerFragment;
-import com.tse.app.Fragment.SellerFragment;
-import com.tse.app.Fragment.ServicesFragment;
+import com.tse.app.Fragment.EditProfileProfileFragment;
+import com.tse.app.Fragment.EditProfileCategoryFragment;
 
 /**
  * Created by Dave on 03/12/2018.
@@ -33,10 +30,10 @@ public class Pager_Editprofile extends FragmentStatePagerAdapter {
         //Returning the current tabs
         switch (position) {
             case 0:
-                EditProfileBuyerFragment tab1 = new EditProfileBuyerFragment();
+                EditProfileProfileFragment tab1 = new EditProfileProfileFragment();
                 return tab1;
             case 1:
-                EditProfileSellerFragment tab2 = new EditProfileSellerFragment();
+                EditProfileCategoryFragment tab2 = new EditProfileCategoryFragment();
                 return tab2;
             default:
                 return null;

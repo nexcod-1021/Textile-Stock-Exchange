@@ -3,33 +3,27 @@ package com.tse.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.res.Resources;
-import android.graphics.Color;
 import android.os.AsyncTask;
-import android.os.Build;
 import android.preference.PreferenceManager;
-import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.bumptech.glide.load.engine.Resource;
 import com.tse.app.AndroidMultiPartEntity;
 import com.tse.app.Config;
 import com.tse.app.R;
@@ -56,15 +50,17 @@ import java.util.Map;
 
 public class RegistrationForm2 extends AppCompatActivity {
     Spinner spRegisterSelectCategory, spRegisterMeters;
-    EditText edRegisterAddress1, edRegisterArea1, edRegisterPincode1, edRegisterAddress2,
-            edRegisterArea2, edRegisterPincode2, edRegisterContactNo1, edRegisterContactNo2,
+    AutoCompleteTextView autoRegisterArea1, autoRegisterArea2;
+    EditText edRegisterAddress1, edRegisterPincode1, edRegisterAddress2,
+            edRegisterPincode2, edRegisterContactNo1, edRegisterContactNo2,
             edRegisterSubCategory, edRegisterQuantity, edRegisterReferralCode;
     RadioButton rbRegisterGeneral, rbRegisterPrime;
-    ProgressDialog pg, pg2;
+    ProgressDialog pg, pg2, pg3,pg4;
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
-    ArrayList<String> cat_name_list;
-    ArrayList<String> qty_type_list;
+    private ArrayList<String> cat_name_list;
+    private ArrayList<String> qty_type_list;
+    private ArrayList<String> fetch_area_list;
 
     long totalSize = 0;
 
@@ -79,19 +75,23 @@ public class RegistrationForm2 extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registration_form2);
+
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(RegistrationForm2.this);
         editor = sharedPreferences.edit();
         Findviewby_Id();
 
-        edRegisterContactNo1.setText(getIntent().getExtras().getString(Config.Contact1));
+        //  edRegisterContactNo1.setText(getIntent().getExtras().getString(Config.Contact1));
         edRegisterContactNo1.setEnabled(false);
 
-        selectedFilePath = getIntent().getExtras().getString(Config.profileUrl);
+        // selectedFilePath = getIntent().getExtras().getString(Config.profileUrl);
 
 
         new Get_price().execute();
         new Get_Category().execute();
         new get_qty().execute();
+        new fetch_area().execute();
+        new check_refferal().execute();
+
         MemberType = rbRegisterGeneral.getText().toString();
 
         rbRegisterGeneral.setOnClickListener(new View.OnClickListener() {
@@ -106,6 +106,7 @@ public class RegistrationForm2 extends AppCompatActivity {
                 MemberType = rbRegisterPrime.getText().toString();
             }
         });
+
 
         spRegisterSelectCategory.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -139,10 +140,10 @@ public class RegistrationForm2 extends AppCompatActivity {
         rbRegisterGeneral = (RadioButton) findViewById(R.id.rbRegistrationGeneral);
         rbRegisterPrime = (RadioButton) findViewById(R.id.rbRegistrationPrime);
         edRegisterAddress1 = (EditText) findViewById(R.id.edRegistrationAddress1);
-        edRegisterArea1 = (EditText) findViewById(R.id.edRegistrationArea1);
+        autoRegisterArea1 = (AutoCompleteTextView) findViewById(R.id.edRegistrationArea1);
         edRegisterPincode1 = (EditText) findViewById(R.id.edRegistrationPincode1);
         edRegisterAddress2 = (EditText) findViewById(R.id.edRegistrationAddress2);
-        edRegisterArea2 = (EditText) findViewById(R.id.edRegistrationArea2);
+        autoRegisterArea2 = (AutoCompleteTextView) findViewById(R.id.edRegistrationArea2);
         edRegisterPincode2 = (EditText) findViewById(R.id.edRegistrationPincode2);
         edRegisterContactNo1 = (EditText) findViewById(R.id.edRegistrationContactNo1);
         edRegisterContactNo2 = (EditText) findViewById(R.id.edRegistrationContactNo2);
@@ -163,13 +164,13 @@ public class RegistrationForm2 extends AppCompatActivity {
         if (edRegisterAddress1.getText().toString().length() == 0) {
             edRegisterAddress1.setError("Please Enter Address 1");
             return false;
-        } else if (edRegisterArea1.getText().toString().length() == 0) {
-            edRegisterArea1.setError("Please Enter Area 1");
+        } else if (autoRegisterArea1.getText().toString().length() == 0) {
+            autoRegisterArea1.setError("Please Enter Area 1");
             return false;
         } else if (edRegisterPincode1.getText().toString().length() == 0) {
             edRegisterPincode1.setError("Please Enter Pincode 1");
             return false;
-        } else if (edRegisterPincode1.getText().toString().length()!= 6) {
+        } else if (edRegisterPincode1.getText().toString().length() != 6) {
             edRegisterPincode1.setError("Please Enter Valid Pincode");
             return false;
         }
@@ -296,7 +297,7 @@ public class RegistrationForm2 extends AppCompatActivity {
                                     }
                                     ArrayAdapter<String> Select_category = new ArrayAdapter<String>(
                                             getApplicationContext(),
-                                            android.R.layout.simple_list_item_1,
+                                            R.layout.dropdowntextview,
                                             cat_name_list
                                     );
 
@@ -440,10 +441,10 @@ public class RegistrationForm2 extends AppCompatActivity {
                 entity.addPart(Config.gst_no, new StringBody(getIntent().getExtras().getString(Config.GstNo)));
                 entity.addPart(Config.pan_no, new StringBody(getIntent().getExtras().getString(Config.PanNo)));
                 entity.addPart(Config.adress1, new StringBody(edRegisterAddress1.getText().toString()));
-                entity.addPart(Config.area1, new StringBody(edRegisterArea1.getText().toString()));
+                entity.addPart(Config.area1, new StringBody(autoRegisterArea1.getText().toString()));
                 entity.addPart(Config.pincode1, new StringBody(edRegisterPincode1.getText().toString()));
                 entity.addPart(Config.adress2, new StringBody(edRegisterAddress2.getText().toString()));
-                entity.addPart(Config.area2, new StringBody(edRegisterArea2.getText().toString()));
+                entity.addPart(Config.area2, new StringBody(autoRegisterArea2.getText().toString()));
                 entity.addPart(Config.pincode2, new StringBody(edRegisterPincode2.getText().toString()));
                 entity.addPart(Config.emailid, new StringBody(getIntent().getExtras().getString(Config.Email)));
                 entity.addPart(Config.contactnumber1, new StringBody(edRegisterContactNo1.getText().toString()));
@@ -490,7 +491,7 @@ public class RegistrationForm2 extends AppCompatActivity {
 
                 if (object.getString("STATUS").equalsIgnoreCase("true")) {
                     Toast.makeText(RegistrationForm2.this, "" + object.getString("MESSAGE"), Toast.LENGTH_SHORT).show();
-                    startActivity(new Intent(getApplicationContext(),LoginActivity.class));
+                    startActivity(new Intent(getApplicationContext(), LoginActivity.class));
                 } else {
                     Toast.makeText(RegistrationForm2.this, "" + object.getString("MESSAGE"), Toast.LENGTH_SHORT).show();
 
@@ -501,5 +502,148 @@ public class RegistrationForm2 extends AppCompatActivity {
             super.onPostExecute(result);
         }
 
+    }
+
+    private class fetch_area extends AsyncTask<Void, Void, Void> {
+
+        @Override
+        protected void onPreExecute() {
+            pg3 = new ProgressDialog(RegistrationForm2.this);
+            pg3.setTitle("Authentication...");
+            pg3.setMessage(Config.LoadingMsg);
+            pg3.show();
+
+        }
+
+        @Override
+        protected Void doInBackground(final Void... email) {
+            StringRequest stringRequest = new StringRequest(Request.Method.POST, Config.BaseUrl + Config.get_fetch_area,
+                    new Response.Listener<String>() {
+                        @Override
+                        public void onResponse(String response) {
+                            try {
+
+                                JSONObject j = new JSONObject(response.trim());
+
+                                if (j.getString("STATUS").equalsIgnoreCase("true")) {
+                                    String response1 = j.getString("response");
+                                    fetch_area_list = new ArrayList();
+                                    JSONArray arr = new JSONArray(response1);
+
+                                    for (int i = 0; i < arr.length(); i++) {
+                                        String data = arr.get(i).toString();
+                                        fetch_area_list.add(data);
+
+                                        ArrayAdapter<String> Fetch_Area1 = new ArrayAdapter<String>(
+                                                getApplicationContext(),
+                                                R.layout.dropdowntextview,
+                                                fetch_area_list
+                                        );
+                                        autoRegisterArea1.setThreshold(1);
+
+
+                                        autoRegisterArea1.setAdapter(Fetch_Area1);
+                                        ArrayAdapter<String> Fetch_Area2 = new ArrayAdapter<String>(
+                                                getApplicationContext(),
+                                                R.layout.dropdowntextview,
+                                                fetch_area_list
+                                        );
+
+                                        autoRegisterArea2.setThreshold(1);
+                                        autoRegisterArea2.setAdapter(Fetch_Area2);
+                                    }
+
+                                    pg3.dismiss();
+                                } else {
+
+                                    pg3.dismiss();
+                                }
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                                pg3.dismiss();
+                            }
+                        }
+                    },
+                    new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            pg3.dismiss();
+
+                        }
+                    });
+            RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
+            requestQueue.add(stringRequest);
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+
+        }
+    }
+    private class check_refferal  extends AsyncTask<Void, Void, Void> {
+
+        @Override
+        protected void onPreExecute() {
+            pg4 = new ProgressDialog(RegistrationForm2.this);
+            pg4.setTitle("Authentication...");
+            pg4.setMessage(Config.LoadingMsg);
+            pg4.show();
+
+        }
+
+        @Override
+        protected Void doInBackground(final Void... email) {
+            StringRequest stringRequest = new StringRequest(Request.Method.POST, Config.BaseUrl + Config.get_check_refferal,
+                    new Response.Listener<String>() {
+                        @Override
+                        public void onResponse(String response) {
+                            try {
+
+                                JSONObject j = new JSONObject(response.trim());
+
+                                if (j.getString("STATUS").equalsIgnoreCase("true")) {
+                                    String response1 = j.getString("refferal%");
+                                    edRegisterReferralCode.setText(response1);
+
+
+                                    pg4.dismiss();
+                                } else {
+
+                                    pg4.dismiss();
+                                }
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                                pg4.dismiss();
+                            }
+                        }
+                    },
+                    new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            pg4.dismiss();
+
+                        }
+                    }) {
+                @Override
+                protected Map<String, String> getParams() {
+                    Map<String, String> map = new HashMap<String, String>();
+                    map.put("tseid", "TSEM00010");
+
+                    return map;
+                }
+
+
+            };
+
+            RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
+            requestQueue.add(stringRequest);
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+
+        }
     }
 }

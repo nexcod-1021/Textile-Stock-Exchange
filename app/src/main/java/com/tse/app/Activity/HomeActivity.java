@@ -2,8 +2,10 @@ package com.tse.app.Activity;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
+import android.preference.PreferenceManager;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -23,6 +25,7 @@ import com.tse.app.Fragment.AboutUsFragment;
 import com.tse.app.Fragment.ContactUsFragment;
 import com.tse.app.Fragment.HomeFragment;
 import com.tse.app.Adapter.Pager_Mainservice;
+import com.tse.app.Fragment.Trad_HistoryFragment;
 import com.tse.app.R;
 
 import java.util.Objects;
@@ -33,7 +36,8 @@ public class HomeActivity extends AppCompatActivity
 
     boolean doubleBackToExitPressedOnce = false;
     Fragment fragment = null;
-    ImageView img_Menu_Profile;
+
+    SharedPreferences sharedPreferences;
 
 
     @SuppressLint("NewApi")
@@ -41,6 +45,7 @@ public class HomeActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(HomeActivity.this);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
@@ -53,6 +58,7 @@ public class HomeActivity extends AppCompatActivity
                 startActivity(intent);
             }
         });
+
 
 
         final DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -95,6 +101,9 @@ public class HomeActivity extends AppCompatActivity
         switch (itemId) {
             case R.id.nav_Home:
                 fragment = new HomeFragment();
+                break;
+            case R.id.nav_Trade_History:
+                fragment = new Trad_HistoryFragment();
                 break;
             case R.id.nav_About_Us:
                 fragment = new AboutUsFragment();

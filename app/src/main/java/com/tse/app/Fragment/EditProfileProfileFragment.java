@@ -38,7 +38,7 @@ public class EditProfileProfileFragment extends android.support.v4.app.Fragment 
     RadioButton rbProfileGeneral, rbProfilePrime;
     AutoCompleteTextView autoProfileArea1, autoProfileArea2;
     private ArrayList<String> fetch_area_list;
-    ProgressDialog pg;
+    ProgressDialog pg,pg1;
 
 
     public EditProfileProfileFragment() {
@@ -102,11 +102,89 @@ public class EditProfileProfileFragment extends android.support.v4.app.Fragment 
             rbProfilePrime.setChecked(true);
         }
         new fetch_area().execute();
+        new edit_profile().execute();
 
         return view;
     }
 
     private class fetch_area extends AsyncTask<Void, Void, Void> {
+
+        @Override
+        protected void onPreExecute() {
+            pg = new ProgressDialog(getContext());
+            pg.setTitle("Authentication...");
+            pg.setMessage(Config.LoadingMsg);
+            pg.show();
+
+        }
+
+        @Override
+        protected Void doInBackground(final Void... email) {
+            StringRequest stringRequest = new StringRequest(Request.Method.POST, Config.BaseUrl + Config.get_fetch_area,
+                    new Response.Listener<String>() {
+                        @Override
+                        public void onResponse(String response) {
+                            try {
+
+                                JSONObject j = new JSONObject(response.trim());
+
+                                if (j.getString("STATUS").equalsIgnoreCase("true")) {
+                                    String response1 = j.getString("response");
+                                    fetch_area_list = new ArrayList();
+                                    JSONArray arr = new JSONArray(response1);
+
+                                    for (int i = 0; i < arr.length(); i++) {
+                                        String data = arr.get(i).toString();
+                                        fetch_area_list.add(data);
+
+                                        ArrayAdapter<String> Fetch_Area1 = new ArrayAdapter<String>(
+                                                getContext(),
+                                                R.layout.dropdowntextview,
+                                                fetch_area_list
+                                        );
+                                        autoProfileArea1.setThreshold(1);
+
+
+                                        autoProfileArea1.setAdapter(Fetch_Area1);
+                                        ArrayAdapter<String> Fetch_Area2 = new ArrayAdapter<String>(
+                                                getContext(),
+                                                R.layout.dropdowntextview,
+                                                fetch_area_list
+                                        );
+
+                                        autoProfileArea2.setThreshold(1);
+                                        autoProfileArea2.setAdapter(Fetch_Area2);
+                                    }
+
+                                    pg.dismiss();
+                                } else {
+
+                                    pg.dismiss();
+                                }
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                                pg.dismiss();
+                            }
+                        }
+                    },
+                    new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            pg.dismiss();
+
+                        }
+                    });
+            RequestQueue requestQueue = Volley.newRequestQueue(getContext());
+            requestQueue.add(stringRequest);
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+
+        }
+    }
+    private class edit_profile extends AsyncTask<Void, Void, Void> {
 
         @Override
         protected void onPreExecute() {

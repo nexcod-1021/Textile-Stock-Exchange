@@ -153,7 +153,7 @@ public class RegistrationForm1 extends AppCompatActivity {
             return false;
 
         } else if (edRegistrationcEnterprice.getText().toString().length() == 0) {
-            edRegistrationcEnterprice.setError("Please enter EnterPrice");
+            edRegistrationcEnterprice.setError("Please enter EnterPrise");
             return false;
         }
         // else if (edRegistrationGstNo.getText().toString().length() == 0) {

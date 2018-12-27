@@ -3,69 +3,85 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/bottom_sheet1"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:layout_marginTop="0dp"
-
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_bottom_sheet_category"
     android:gravity="bottom"
     android:orientation="vertical"
+    android:padding="20dp"
     app:behavior_hideable="true"
     app:behavior_peekHeight="0dp"
     app:layout_behavior="android.support.design.widget.BottomSheetBehavior">
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:fontFamily="@font/bold"
+        android:text="Add Category"
+        android:textColor="@color/colorwhite"
+        android:textSize="18dp" />
+
+
+    <Spinner
+
+        android:id="@+id/spProfileSelect_Category"
+        style="@style/style_spinner"
+        android:layout_width="match_parent"
+        android:layout_height="38dp"
+        android:layout_marginTop="10dp"
+        android:background="@mipmap/select_category_textfield"
+        android:backgroundTint="@color/colorwhite" />
+
+
+    <EditText
+
+        android:id="@+id/edProfileSub_Category"
+        style="@style/style_edittext"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/colorwhite"
+        android:hint="Sub Category"
+        android:textColor="@color/colorwhite"
+        android:textColorHint="@color/colorwhite" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/roundradius_background"
-        android:orientation="vertical"
-        android:paddingLeft="30dp"
-        android:paddingTop="20dp"
-        android:paddingRight="30dp"
-        android:paddingBottom="30dp">
-
-        <Spinner
-            android:id="@+id/spProfileSelect_Category"
-            style="@style/style_spinner"
-            android:layout_width="match_parent"
-            android:layout_height="38dp"
-            android:layout_marginTop="10dp"
-            android:background="@mipmap/select_category_textfield"
-
-            />
+        android:orientation="horizontal">
 
 
         <EditText
-            android:id="@+id/edProfileSub_Category"
+            android:id="@+id/edProfileQuantity"
             style="@style/style_edittext"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:hint="Sub Category" />
+            android:layout_marginTop="0dp"
+            android:layout_weight="1"
+            android:backgroundTint="@color/colorwhite"
+            android:hint="Quantity"
+            android:inputType="number"
+            android:textColor="@color/colorwhite"
+            android:textColorHint="@color/colorwhite" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-
-            <EditText
-                android:id="@+id/edProfileQuantity"
-                style="@style/style_edittext"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="0dp"
-                android:layout_weight="1"
-                android:hint="Quantity"
-                android:inputType="number" />
-
-            <Spinner
-                android:id="@+id/spProfileMeters"
-                style="@style/style_spinner"
-                android:layout_width="0dp"
-                android:layout_height="38dp"
-                android:layout_marginLeft="5dp"
-                android:layout_weight="1"
-                android:background="@mipmap/spinner_half" />
-
-
-        </LinearLayout>
+        <Spinner
+            android:id="@+id/spProfileMeters"
+            style="@style/style_spinner"
+            android:layout_width="0dp"
+            android:layout_height="38dp"
+            android:layout_marginLeft="5dp"
+            android:layout_weight="1"
+            android:background="@mipmap/spinner_half"
+            android:backgroundTint="@color/colorwhite" />
     </LinearLayout>
+
+    <Button
+
+        android:id="@+id/btn_catagory_submit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/roundradius_background"
+        android:fontFamily="@font/bold"
+        android:text="Submit"
+        android:textColor="@color/colorPrimary" />
 </LinearLayout>

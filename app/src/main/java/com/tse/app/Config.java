@@ -18,6 +18,8 @@ public class Config {
 
     public static final String LoadingMsg = "Please Wait...";
     public static final String response = "response";
+    public static final String offer = "offer";
+    public static final String addsubcategory = "addsubcategory";
 
     public static String spPriceGeneral = "spPriceGeneral";
     public static String spPricePrime = "spPricePrime";
@@ -63,6 +65,7 @@ public class Config {
     //login Response Data
     public static String Sharedprefuser_id = "user_id";
     public static String SharedprefTSE_id = "TSE_id";
+    public static String SharedprefUserType = "user_type";
     public static String Sharedprefprofileimage = "profileimage";
     public static String Sharedprefname = "name";
     public static String Sharedprefsurname = "surname";
@@ -87,6 +90,7 @@ public class Config {
     public static String Sharedprefsubscription_enddate = "subscription_enddate";
     public static String SharedprefRefferalcode = "Refferalcode";
     public static String Sharedprefcash_bak = "cash_bak";
+    public static String Sharedprefimgpath = "imgpath";
 
 
 }

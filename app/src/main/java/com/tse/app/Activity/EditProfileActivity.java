@@ -28,6 +28,7 @@ public class EditProfileActivity extends AppCompatActivity implements TabLayout.
     private ViewPager viewPager;
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,12 +39,6 @@ public class EditProfileActivity extends AppCompatActivity implements TabLayout.
 
         findViewByIdS();
 
-        ivProfileImage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showFileChooser();
-            }
-        });
 
         tabLayout = (TabLayout) findViewById(R.id.tabLayout);
         tabLayout.addTab(tabLayout.newTab().setText("Profile"));
@@ -94,26 +89,7 @@ public class EditProfileActivity extends AppCompatActivity implements TabLayout.
 
     }
 
-    private void showFileChooser() {
 
-        Intent intent = new Intent();
-        intent.setType("image/*");
-        intent.setAction(Intent.ACTION_GET_CONTENT);
-        startActivityForResult(Intent.createChooser(intent, "Choose File"), PICK_PDF_REQUEST);
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        if (requestCode == PICK_PDF_REQUEST && resultCode == RESULT_OK && data != null && data.getData() != null) {
-
-            Uri selectedFileUri = data.getData();
-            selectedFilePath = FilePath.getPath(this, selectedFileUri);
-            Glide.with(getApplicationContext()).load(selectedFilePath).diskCacheStrategy(DiskCacheStrategy.ALL).into(ivProfileImage);
-            Log.i(TAG, "Selected File Path:" + selectedFilePath);
-        }
-    }
 
 
     @Override

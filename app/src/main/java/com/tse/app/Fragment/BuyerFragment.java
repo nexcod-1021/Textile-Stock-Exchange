@@ -54,11 +54,8 @@ public class BuyerFragment extends android.support.v4.app.Fragment {
 
     RecyclerView RecyclerViewDeatailItem;
     private LinearLayoutManager linearLayoutManager;
-    private DividerItemDecoration dividerItemDecoration;
     private ArrayList<Order_Fatch> list;
     private BuyerListAdeptor buyerListAdeptor;
-
-
     ProgressDialog pg;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -67,7 +64,7 @@ public class BuyerFragment extends android.support.v4.app.Fragment {
         View view = inflater.inflate(R.layout.fragment_buyer, container, false);
 
 
-        RecyclerViewDeatailItem = view.findViewById(R.id.RecyclerViewDeatailItem);
+        RecyclerViewDeatailItem = view.findViewById(R.id.RvBuyerDeatailItem);
         linearLayoutManager = new LinearLayoutManager(getContext());
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
 

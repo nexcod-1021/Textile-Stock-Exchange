@@ -2,6 +2,7 @@ package com.tse.app.Fragment;
 
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -14,12 +15,14 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -29,6 +32,8 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.tse.app.Activity.EditProfileActivity;
+import com.tse.app.Activity.MobileRegisterActivity;
+import com.tse.app.Activity.VerifyOTPActivity;
 import com.tse.app.Adapter.BuyerListAdeptor;
 import com.tse.app.Config;
 import com.tse.app.Model.Order_Fatch;
@@ -39,6 +44,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class EditProfileCategoryFragment extends android.support.v4.app.Fragment {
     Spinner spProfileSelect_Category, spProfileMeters;
@@ -47,12 +54,12 @@ public class EditProfileCategoryFragment extends android.support.v4.app.Fragment
 
     ArrayList<String> cat_name_list;
     ArrayList<String> qty_type_list;
-    private  ProgressDialog pg, pg2;
+    private ProgressDialog pg,pg1, pg2;
     FloatingActionButton btnProfileAdd;
     RecyclerView rcEditProfileCategory;
     private LinearLayoutManager linearLayoutManager;
-    private ArrayList<String> list;
-    private BuyerListAdeptor buyerListAdeptor;
+    Button btnAddCategory;
+
     private BottomSheetBehavior sheetBehavior;
     LinearLayout linearLayout;
 
@@ -71,20 +78,13 @@ public class EditProfileCategoryFragment extends android.support.v4.app.Fragment
         new Get_Category().execute();
         new get_qty().execute();
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getContext());
-        final ImageView imageView = (ImageView) ((EditProfileActivity) getActivity()).findViewById(R.id.cv_profile_image);
-        imageView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(getContext(), "call", Toast.LENGTH_SHORT).show();
-            }
-        });
-
 
 
         linearLayout = (LinearLayout) view.findViewById(R.id.bottom_sheet1);
         btnProfileAdd = (FloatingActionButton) view.findViewById(R.id.btnProfileAdd);
         rcEditProfileCategory = (RecyclerView) view.findViewById(R.id.rcEditProfileCategory);
         sheetBehavior = BottomSheetBehavior.from(linearLayout);
+
 
         sheetBehavior.setBottomSheetCallback(new BottomSheetBehavior.BottomSheetCallback() {
             @Override
@@ -94,6 +94,39 @@ public class EditProfileCategoryFragment extends android.support.v4.app.Fragment
                 edProfileSub_Category = (EditText) bottomSheet.findViewById(R.id.edProfileSub_Category);
                 edProfileQuantity = (EditText) bottomSheet.findViewById(R.id.edProfileQuantity);
                 spProfileMeters = (Spinner) bottomSheet.findViewById(R.id.spProfileMeters);
+
+                btnAddCategory = (Button) bottomSheet.findViewById(R.id.btn_catagory_submit);
+                spProfileSelect_Category.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                    @Override
+                    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                        ((TextView) parent.getChildAt(0)).setTextColor(getResources().getColor(R.color.colorwhite));
+
+                    }
+
+                    @Override
+                    public void onNothingSelected(AdapterView<?> parent) {
+
+                    }
+                });
+                spProfileMeters.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                    @Override
+                    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                        ((TextView) parent.getChildAt(0)).setTextColor(getResources().getColor(R.color.colorwhite));
+                    }
+
+                    @Override
+                    public void onNothingSelected(AdapterView<?> parent) {
+
+                    }
+                });
+                btnAddCategory.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if (Validation()) {
+                            new addsubcategory().execute();
+                        }
+                    }
+                });
 
                 ArrayAdapter<String> Select_category = new ArrayAdapter<String>(
                         getContext(),
@@ -153,6 +186,19 @@ public class EditProfileCategoryFragment extends android.support.v4.app.Fragment
 
         return view;
     }
+    public boolean Validation() {
+        if (edProfileSub_Category.getText().toString().length() == 0) {
+            edProfileSub_Category.setError("Please Enter Sub Category");
+            return false;
+        } else if (edProfileQuantity.getText().toString().length() == 0) {
+            edProfileQuantity.setError("Please Enter Quantity");
+            return false;
+        }
+
+
+        return true;
+
+    }
 
     private class Get_Category extends AsyncTask<String, Void, String> {
         @Override
@@ -182,7 +228,6 @@ public class EditProfileCategoryFragment extends android.support.v4.app.Fragment
                                         String cat_name = jsonProductObject.getString("cat_name");
                                         cat_name_list.add(cat_name);
                                     }
-
 
 
                                     pg2.dismiss();
@@ -245,7 +290,6 @@ public class EditProfileCategoryFragment extends android.support.v4.app.Fragment
                             }
 
 
-
                             pg.dismiss();
 
                         } else {
@@ -275,6 +319,70 @@ public class EditProfileCategoryFragment extends android.support.v4.app.Fragment
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
+        }
+    }
+
+    private class addsubcategory extends AsyncTask<Void, Void, Void> {
+
+        @Override
+        protected void onPreExecute() {
+            pg1 = new ProgressDialog(getContext());
+            pg1.setTitle("Authentication...");
+            pg1.setMessage(Config.LoadingMsg);
+            pg1.show();
+
+        }
+
+        @Override
+        protected Void doInBackground(final Void... email) {
+            StringRequest stringRequest = new StringRequest(Request.Method.POST, Config.BaseUrl + Config.addsubcategory,
+                    new Response.Listener<String>() {
+                        @Override
+                        public void onResponse(String response) {
+                            try {
+                                JSONObject j = new JSONObject(response.trim());
+
+                                if (j.getString("STATUS").equalsIgnoreCase("true")) {
+                                    Toast.makeText(getContext(), response, Toast.LENGTH_SHORT).show();
+
+                                } else {
+
+                                    pg1.dismiss();
+                                }
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                                pg1.dismiss();
+                            }
+                        }
+                    },
+                    new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            pg1.dismiss();
+
+                        }
+                    }) {
+                @Override
+                protected Map<String, String> getParams() {
+                    Map<String, String> map = new HashMap<String, String>();
+                    map.put("user_id", sharedPreferences.getString(Config.SharedprefTSE_id,""));
+                    map.put("cat_id", spProfileSelect_Category.toString());
+                    map.put("subcategory", spProfileSelect_Category.toString());
+                    map.put("qty",edProfileQuantity.getText().toString());
+                    map.put("productname", "data");
+
+
+                    return map;
+                }
+            };
+            RequestQueue requestQueue = Volley.newRequestQueue(getContext());
+            requestQueue.add(stringRequest);
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+
         }
     }
 

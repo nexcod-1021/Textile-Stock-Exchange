@@ -42,6 +42,23 @@
         android:src="@color/colorAccent"
         app:civ_border_color="#FFFFFF"
         app:civ_border_width="6dp" />
+    <TextView
+        android:id="@+id/TextEditProfile"
+        android:layout_width="110dp"
+        android:layout_height="110dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="100dp"
+        android:textColor="@color/colorwhite"
+        android:textSize="32dp"
+        android:maxLength="2"
+        android:text="AA"
+        android:textAllCaps="true"
+        android:fontFamily="@font/bold"
+        android:gravity="center"
+        android:src="@color/colorAccent"
+        android:visibility="gone"
+
+        />
 
     <android.support.v4.view.ViewPager
         android:id="@+id/pager"

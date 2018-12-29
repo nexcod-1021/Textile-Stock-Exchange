@@ -51,8 +51,13 @@ public class SellerFragment extends android.support.v4.app.Fragment {
         linearLayoutManager = new LinearLayoutManager(getContext());
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
 
+        if (getArguments().getInt("flag") == 0) {
+            new SellerDetail_Item().execute(Config.BaseUrl + Config.get_order_fetch);
+        } else {
+            new SellerDetail_Item().execute(Config.BaseUrl + Config.trade_history_offer);
 
-        new SellerDetail_Item().execute();
+        }
+
         return view;
     }  private class SellerDetail_Item extends AsyncTask<String, Void, String> {
         @Override
@@ -65,8 +70,8 @@ public class SellerFragment extends android.support.v4.app.Fragment {
         }
 
         @Override
-        protected String doInBackground(String... strings) {
-            StringRequest stringRequest = new StringRequest(Request.Method.POST, Config.BaseUrl + Config.get_order_fetch, new Response.Listener<String>() {
+        protected String doInBackground(String... urlPath) {
+            StringRequest stringRequest = new StringRequest(Request.Method.POST, urlPath[0], new Response.Listener<String>() {
                 @Override
                 public void onResponse(String response) {
 
@@ -94,7 +99,7 @@ public class SellerFragment extends android.support.v4.app.Fragment {
                                 order_fatch.setRemark(jsonProductObject.getString("remark"));
                                 order_fatch.setQualitiy(jsonProductObject.getString("qualitiy"));
                                 order_fatch.setPaymentterms(jsonProductObject.getString("paymentterms"));
-                                order_fatch.setArea1(jsonProductObject.getString("area1"));
+                              //  order_fatch.setArea1(jsonProductObject.getString("area1"));
                                 list.add(order_fatch);
                             }
 

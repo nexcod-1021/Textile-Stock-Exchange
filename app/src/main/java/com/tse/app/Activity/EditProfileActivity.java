@@ -111,4 +111,12 @@ public class EditProfileActivity extends AppCompatActivity implements TabLayout.
         Intent intent = new Intent(EditProfileActivity.this,HomeActivity.class);
         startActivity(intent);
     }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent intent = new Intent(EditProfileActivity.this,HomeActivity.class);
+        startActivity(intent);
+    }
+
 }

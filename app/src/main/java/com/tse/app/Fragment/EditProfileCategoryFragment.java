@@ -54,11 +54,12 @@ public class EditProfileCategoryFragment extends android.support.v4.app.Fragment
 
     ArrayList<String> cat_name_list;
     ArrayList<String> qty_type_list;
-    private ProgressDialog pg,pg1, pg2;
+    private ProgressDialog pg,pg2, pg1;
     FloatingActionButton btnProfileAdd;
     RecyclerView rcEditProfileCategory;
     private LinearLayoutManager linearLayoutManager;
     Button btnAddCategory;
+    ImageView img_closesheet;
 
     private BottomSheetBehavior sheetBehavior;
     LinearLayout linearLayout;
@@ -96,6 +97,16 @@ public class EditProfileCategoryFragment extends android.support.v4.app.Fragment
                 spProfileMeters = (Spinner) bottomSheet.findViewById(R.id.spProfileMeters);
 
                 btnAddCategory = (Button) bottomSheet.findViewById(R.id.btn_catagory_submit);
+                img_closesheet = (ImageView) bottomSheet.findViewById(R.id.img_closesheet);
+                img_closesheet.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if (sheetBehavior.getState() == BottomSheetBehavior.STATE_EXPANDED) {
+                            sheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
+                        } else {
+                        }
+                    }
+                });
                 spProfileSelect_Category.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                     @Override
                     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -343,10 +354,11 @@ public class EditProfileCategoryFragment extends android.support.v4.app.Fragment
                                 JSONObject j = new JSONObject(response.trim());
 
                                 if (j.getString("STATUS").equalsIgnoreCase("true")) {
-                                    Toast.makeText(getContext(), response, Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(getContext(), ""+j.getString("MESSAGE"), Toast.LENGTH_SHORT).show();
 
+                                    pg1.dismiss();
                                 } else {
-
+                                    Toast.makeText(getContext(), ""+j.getString("MESSAGE"), Toast.LENGTH_SHORT).show();
                                     pg1.dismiss();
                                 }
                             } catch (JSONException e) {

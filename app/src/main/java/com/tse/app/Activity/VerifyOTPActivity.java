@@ -137,7 +137,7 @@ public class VerifyOTPActivity extends AppCompatActivity {
         if(enterOtpString.length()==4) {
 
             if (getIntent().getExtras().getString("code").equals(enterOtpString)) {
-                Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+                Intent intent = new Intent(getApplicationContext(), RegistrationForm1.class);
                 intent.putExtra("contact1", getIntent().getExtras().getString("mobile"));
                 startActivity(intent);
 

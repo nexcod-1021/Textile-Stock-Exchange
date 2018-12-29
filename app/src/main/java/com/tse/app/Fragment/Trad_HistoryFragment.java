@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.tse.app.Adapter.Pager_Mainservice;
+import com.tse.app.Adapter.Pager_Mainservice_Traders;
 import com.tse.app.R;
 
 public class Trad_HistoryFragment extends android.support.v4.app.Fragment implements TabLayout.BaseOnTabSelectedListener {
@@ -40,7 +41,7 @@ public class Trad_HistoryFragment extends android.support.v4.app.Fragment implem
         viewPager = (ViewPager) view.findViewById(R.id.pager);
 
         //Creating our pager adapter
-        Pager_Mainservice adapter = new Pager_Mainservice(getChildFragmentManager(), tabLayout.getTabCount());
+        Pager_Mainservice_Traders adapter = new Pager_Mainservice_Traders(getChildFragmentManager(), tabLayout.getTabCount());
 
         //Adding adapter to pager
         viewPager.setAdapter(adapter);

@@ -29,7 +29,6 @@ public class HomeFragment extends android.support.v4.app.Fragment implements Tab
         getActivity().setTitle("Home");
 
 
-
         View view = inflater.inflate(R.layout.fragment_home, container, false);
         tabLayout = (TabLayout) view.findViewById(R.id.tabLayout);
 

@@ -36,11 +36,11 @@
 
 
             <TextView
+                android:id="@+id/TxtUserName"
                 style="@style/style_textview"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/semibold"
-                android:text="Ankit Varma"
                 android:textColor="@color/colorwhite"
                 android:textSize="16sp"
                 android:gravity="center|start"
@@ -48,11 +48,11 @@
                 />
 
             <TextView
+                android:id="@+id/TxtUserEmail"
                 android:textSize="14sp"
                 style="@style/style_textview"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="ankitvarma13@gmail.com"
                 android:textColor="@color/colorwhite"
                 android:gravity="center|start"/>
 

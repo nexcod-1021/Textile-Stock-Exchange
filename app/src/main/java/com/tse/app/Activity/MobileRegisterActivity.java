@@ -45,6 +45,7 @@ public class MobileRegisterActivity extends AppCompatActivity {
         findViewByIdS();
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(MobileRegisterActivity.this);
         editor = sharedPreferences.edit();
+        edMobileNumber.setText("");
 
 
 

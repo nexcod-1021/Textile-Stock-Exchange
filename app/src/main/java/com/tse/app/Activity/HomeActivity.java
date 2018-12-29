@@ -22,6 +22,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
@@ -45,6 +46,7 @@ public class HomeActivity extends AppCompatActivity
 
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
+    TextView TxtUserEmail,TxtUserName;
 
 
     @SuppressLint("NewApi")
@@ -53,11 +55,15 @@ public class HomeActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(HomeActivity.this);
+        editor = sharedPreferences.edit();
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         View headerView = navigationView.getHeaderView(0);
         ImageView imgMenuProfile = (ImageView)headerView.findViewById(R.id.img_Menu_Profile);
+        TxtUserName = (TextView) headerView.findViewById(R.id.TxtUserName);
+        TxtUserEmail = (TextView)headerView.findViewById(R.id.TxtUserEmail);
+
         imgMenuProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -69,6 +75,8 @@ public class HomeActivity extends AppCompatActivity
                 load(sharedPreferences.getString(Config.Sharedprefimgpath, "")).centerCrop().
                 diskCacheStrategy(DiskCacheStrategy.ALL).
                 into(imgMenuProfile);
+        TxtUserName.setText(sharedPreferences.getString(Config.Sharedprefname,"")+sharedPreferences.getString(Config.Sharedprefsurname,""));
+        TxtUserEmail.setText(sharedPreferences.getString(Config.Sharedprefemailid,""));
 
 
         final DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -130,7 +138,7 @@ public class HomeActivity extends AppCompatActivity
                             public void onClick(DialogInterface arg0, int arg1) {
 
                                 //Getting out sharedpreferences
-                                editor = sharedPreferences.edit();
+
                                 editor.clear();
                                 editor.commit();
                                 Intent intent = new Intent(HomeActivity.this, LoginActivity.class);
@@ -191,7 +199,7 @@ public class HomeActivity extends AppCompatActivity
                 public void run() {
                     doubleBackToExitPressedOnce = false;
                 }
-            }, 2000);
+            }, 3000);
         }
     }
 }

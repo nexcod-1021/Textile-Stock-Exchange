@@ -25,6 +25,8 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.github.ybq.android.spinkit.sprite.Sprite;
+import com.github.ybq.android.spinkit.style.DoubleBounce;
 import com.tse.app.Activity.RegistrationForm2;
 import com.tse.app.Adapter.BuyerListAdeptor;
 import com.tse.app.Config;
@@ -38,16 +40,14 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.ArrayAdapter;
-
-
-
-
+import android.widget.ProgressBar;
 
 
 public class BuyerFragment extends android.support.v4.app.Fragment {
@@ -57,6 +57,7 @@ public class BuyerFragment extends android.support.v4.app.Fragment {
     private ArrayList<Order_Fatch> list;
     private BuyerListAdeptor buyerListAdeptor;
     ProgressDialog pg;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -64,12 +65,19 @@ public class BuyerFragment extends android.support.v4.app.Fragment {
         View view = inflater.inflate(R.layout.fragment_buyer, container, false);
 
 
+
+
         RecyclerViewDeatailItem = view.findViewById(R.id.RvBuyerDeatailItem);
         linearLayoutManager = new LinearLayoutManager(getContext());
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
 
 
-        new BuyerDetail_Item().execute();
+        if (getArguments().getInt("flag") == 0) {
+            new BuyerDetail_Item().execute(Config.BaseUrl + Config.get_order_fetch);
+        } else {
+            new BuyerDetail_Item().execute(Config.BaseUrl + Config.trade_history_offer);
+
+        }
         return view;
     }
 
@@ -84,8 +92,8 @@ public class BuyerFragment extends android.support.v4.app.Fragment {
         }
 
         @Override
-        protected String doInBackground(String... strings) {
-            StringRequest stringRequest = new StringRequest(Request.Method.POST, Config.BaseUrl + Config.get_order_fetch, new Response.Listener<String>() {
+        protected String doInBackground(String... urlPath) {
+            StringRequest stringRequest = new StringRequest(Request.Method.POST, urlPath[0], new Response.Listener<String>() {
                 @Override
                 public void onResponse(String response) {
 
@@ -112,7 +120,7 @@ public class BuyerFragment extends android.support.v4.app.Fragment {
                                 order_fatch.setRemark(jsonProductObject.getString("remark"));
                                 order_fatch.setQualitiy(jsonProductObject.getString("qualitiy"));
                                 order_fatch.setPaymentterms(jsonProductObject.getString("paymentterms"));
-                                order_fatch.setArea1(jsonProductObject.getString("area1"));
+                               // order_fatch.setArea1(jsonProductObject.getString("area1"));
                                 list.add(order_fatch);
                             }
 
@@ -122,7 +130,6 @@ public class BuyerFragment extends android.support.v4.app.Fragment {
 
                             RecyclerViewDeatailItem.setAdapter(buyerListAdeptor);
                             buyerListAdeptor.notifyDataSetChanged();
-
 
 
                             pg.dismiss();
@@ -146,8 +153,8 @@ public class BuyerFragment extends android.support.v4.app.Fragment {
                 @Override
                 protected Map<String, String> getParams() {
                     Map<String, String> map = new HashMap<String, String>();
-                    map.put("user_id","TSEM00074");
-                    map.put("type","1");
+                    map.put("user_id", "TSEM00074");
+                    map.put("type", "1");
 
                     return map;
                 }

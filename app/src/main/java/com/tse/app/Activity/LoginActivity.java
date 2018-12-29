@@ -124,7 +124,7 @@ public class LoginActivity extends AppCompatActivity {
                                     editor.putString(Config.Sharedprefpassword, jsonProductObject.getString("password"));
                                     editor.putString(Config.Sharedprefcontactnumber1, jsonProductObject.getString("contactnumber1"));
                                     editor.putString(Config.Sharedprefcontactnumber2, jsonProductObject.getString("contactnumber2"));
-                                    editor.putString(Config.Sharedprefcategory, jsonProductObject.getString("category"));
+                                  //  editor.putString(Config.Sharedprefcategory, jsonProductObject.getString("category"));
                                     editor.putString(Config.Sharedprefsubcategory, jsonProductObject.getString("subcategory"));
                                     editor.putString(Config.SharedprefQty, jsonProductObject.getString("Qty"));
                                     editor.putString(Config.SharedprefMembership, jsonProductObject.getString("Membership"));

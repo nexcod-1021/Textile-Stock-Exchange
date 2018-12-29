@@ -14,13 +14,13 @@ import com.tse.app.Fragment.ServicesFragment;
  * Created by Dave on 03/12/2018.
  */
 
-public class Pager_Mainservice extends FragmentStatePagerAdapter {
+public class Pager_Mainservice_Traders extends FragmentStatePagerAdapter {
     //integer to count number of tabs
     int tabCount;
     Context context;
 
 
-    public Pager_Mainservice(FragmentManager fm, int tabCount) {
+    public Pager_Mainservice_Traders(FragmentManager fm, int tabCount) {
         super(fm);
         this.tabCount = tabCount;
 
@@ -31,7 +31,7 @@ public class Pager_Mainservice extends FragmentStatePagerAdapter {
     public Fragment getItem(int position) {
         //Returning the current tabs
         Bundle bundle = new Bundle();
-        bundle.putInt("flag",0);
+        bundle.putInt("flag",1);
         switch (position) {
             case 0:
                 BuyerFragment tab1 = new BuyerFragment();

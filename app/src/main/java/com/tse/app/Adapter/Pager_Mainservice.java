@@ -29,21 +29,22 @@ public class Pager_Mainservice extends FragmentStatePagerAdapter {
     //Overriding method getItem
     @Override
     public Fragment getItem(int position) {
-        //Returning the current tabs
-        Bundle bundle = new Bundle();
-        bundle.putInt("flag",0);
+
+
+
         switch (position) {
             case 0:
                 BuyerFragment tab1 = new BuyerFragment();
-                tab1.setArguments(bundle);
+
+
                 return tab1;
             case 1:
                 SellerFragment tab2 = new SellerFragment();
-                tab2.setArguments(bundle);
+
                 return tab2;
             case 2:
                 ServicesFragment tab3 = new ServicesFragment();
-                tab3.setArguments(bundle);
+
                 return tab3;
             default:
                 return null;

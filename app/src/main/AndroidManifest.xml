@@ -22,11 +22,7 @@
             android:name=".Activity.SplashScreanActivity"
             android:theme="@style/no_actionbar"
             android:screenOrientation="portrait">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
 
         </activity>
         <activity
@@ -46,7 +42,7 @@
             android:screenOrientation="portrait">
 
         </activity>
-        <activity android:name=".Activity.BuyerDetailActivity"
+        <activity android:name=".Activity.HomeDetailActivity"
             android:label="Detail"
             android:theme="@style/AppTheme"
             android:parentActivityName=".Activity.HomeActivity"
@@ -85,7 +81,20 @@
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="stateAlwaysHidden"
             android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
+        <activity android:name=".Activity.TraderDetailActivity"
+            android:theme="@style/AppTheme"
+            android:label="Detail"
+            android:parentActivityName=".Activity.HomeActivity"
+            android:windowSoftInputMode="stateAlwaysHidden"
+            android:screenOrientation="portrait">
+        </activity>
+
         <service android:name=".MyService"
             android:enabled="true">
             <intent-filter>

@@ -15,12 +15,14 @@ public class Config {
     public static final String get_fetch_area = "fetch_area";
     public static final String get_check_refferal = "check_refferal";
     public static final String edit_profile = "edit_profile";
+    public static final String insert_offer = "offer";
 
     public static final String LoadingMsg = "Please Wait...";
     public static final String response = "response";
     public static final String offer = "offer";
     public static final String addsubcategory = "addsubcategory";
     public static final String trade_history_offer = "trade_history_offer";
+    public static final String trade_history = "trade_history";
 
     public static String spPriceGeneral = "spPriceGeneral";
     public static String spPricePrime = "spPricePrime";

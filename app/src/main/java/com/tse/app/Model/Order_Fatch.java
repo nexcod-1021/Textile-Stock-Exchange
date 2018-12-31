@@ -13,8 +13,9 @@ public class Order_Fatch {
     private String qualitiy;
     private String paymentterms;
     private String rate;
+    private String Status;
 
-    public Order_Fatch(String ordercode, String category, String subcategory, String product, String area1, String dimension, String gsm, String colour, String remark, String qualitiy, String paymentterms, String rate) {
+    public Order_Fatch(String ordercode, String category, String subcategory, String product, String area1, String dimension, String gsm, String colour, String remark, String qualitiy, String paymentterms, String rate, String status) {
         this.ordercode = ordercode;
         this.category = category;
         this.subcategory = subcategory;
@@ -27,6 +28,7 @@ public class Order_Fatch {
         this.qualitiy = qualitiy;
         this.paymentterms = paymentterms;
         this.rate = rate;
+        Status = status;
     }
 
     public Order_Fatch() {
@@ -126,5 +128,13 @@ public class Order_Fatch {
 
     public void setRate(String rate) {
         this.rate = rate;
+    }
+
+    public String getStatus() {
+        return Status;
+    }
+
+    public void setStatus(String status) {
+        Status = status;
     }
 }

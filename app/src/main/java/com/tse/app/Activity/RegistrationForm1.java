@@ -186,7 +186,8 @@ public class RegistrationForm1 extends AppCompatActivity {
         if (requestCode == PICK_PDF_REQUEST && resultCode == RESULT_OK && data != null && data.getData() != null) {
 
             Uri selectedFileUri = data.getData();
-            selectedFilePath = FilePath.getPath(this, selectedFileUri);
+            selectedFilePath = FilePath.
+                    getPath(this, selectedFileUri);
             Glide.with(getApplicationContext()).load(selectedFilePath).centerCrop().diskCacheStrategy(DiskCacheStrategy.ALL).into(ivProfileImage);
             Log.i(TAG, "Selected File Path:" + selectedFilePath);
         }

@@ -75,7 +75,7 @@ public class HomeActivity extends AppCompatActivity
                 load(sharedPreferences.getString(Config.Sharedprefimgpath, "")).centerCrop().
                 diskCacheStrategy(DiskCacheStrategy.ALL).
                 into(imgMenuProfile);
-        TxtUserName.setText(sharedPreferences.getString(Config.Sharedprefname,"")+sharedPreferences.getString(Config.Sharedprefsurname,""));
+        TxtUserName.setText(sharedPreferences.getString(Config.Sharedprefname,"")+" "+sharedPreferences.getString(Config.Sharedprefsurname,""));
         TxtUserEmail.setText(sharedPreferences.getString(Config.Sharedprefemailid,""));
 
 

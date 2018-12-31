@@ -9,6 +9,8 @@ import android.support.v4.app.FragmentStatePagerAdapter;
 import com.tse.app.Fragment.BuyerFragment;
 import com.tse.app.Fragment.SellerFragment;
 import com.tse.app.Fragment.ServicesFragment;
+import com.tse.app.Fragment.TraderBuyerFragment;
+import com.tse.app.Fragment.TraderServicesFragment;
 
 /**
  * Created by Dave on 03/12/2018.
@@ -31,19 +33,19 @@ public class Pager_Mainservice_Traders extends FragmentStatePagerAdapter {
     public Fragment getItem(int position) {
         //Returning the current tabs
         Bundle bundle = new Bundle();
-        bundle.putInt("flag",1);
+
         switch (position) {
             case 0:
-                BuyerFragment tab1 = new BuyerFragment();
-                tab1.setArguments(bundle);
+                TraderBuyerFragment tab1 = new TraderBuyerFragment();
+
                 return tab1;
             case 1:
-                SellerFragment tab2 = new SellerFragment();
-                tab2.setArguments(bundle);
+                TraderServicesFragment tab2 = new TraderServicesFragment();
+
                 return tab2;
             case 2:
-                ServicesFragment tab3 = new ServicesFragment();
-                tab3.setArguments(bundle);
+                TraderServicesFragment tab3 = new TraderServicesFragment();
+
                 return tab3;
             default:
                 return null;

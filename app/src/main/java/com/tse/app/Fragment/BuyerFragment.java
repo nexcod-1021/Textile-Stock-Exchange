@@ -2,22 +2,14 @@ package com.tse.app.Fragment;
 
 
 import android.app.ProgressDialog;
-import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.app.Fragment;
-import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.helper.ItemTouchHelper;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.EditText;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -25,10 +17,8 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.github.ybq.android.spinkit.sprite.Sprite;
-import com.github.ybq.android.spinkit.style.DoubleBounce;
-import com.tse.app.Activity.RegistrationForm2;
-import com.tse.app.Adapter.BuyerListAdeptor;
+
+import com.tse.app.Adapter.HomeAdeptor;
 import com.tse.app.Config;
 import com.tse.app.Model.Order_Fatch;
 import com.tse.app.R;
@@ -41,21 +31,13 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.util.Log;
-import android.widget.ArrayAdapter;
-import android.widget.ProgressBar;
-
 
 public class BuyerFragment extends android.support.v4.app.Fragment {
 
     RecyclerView RecyclerViewDeatailItem;
     private LinearLayoutManager linearLayoutManager;
     private ArrayList<Order_Fatch> list;
-    private BuyerListAdeptor buyerListAdeptor;
+    private HomeAdeptor homeAdeptor;
     ProgressDialog pg;
 
     @Override
@@ -63,23 +45,18 @@ public class BuyerFragment extends android.support.v4.app.Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_buyer, container, false);
-
-
-
-
         RecyclerViewDeatailItem = view.findViewById(R.id.RvBuyerDeatailItem);
         linearLayoutManager = new LinearLayoutManager(getContext());
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+        new BuyerDetail_Item().execute();
 
 
-        if (getArguments().getInt("flag") == 0) {
-            new BuyerDetail_Item().execute(Config.BaseUrl + Config.get_order_fetch);
-        } else {
-            new BuyerDetail_Item().execute(Config.BaseUrl + Config.trade_history_offer);
 
-        }
         return view;
     }
+
+
+
 
     private class BuyerDetail_Item extends AsyncTask<String, Void, String> {
         @Override
@@ -92,8 +69,8 @@ public class BuyerFragment extends android.support.v4.app.Fragment {
         }
 
         @Override
-        protected String doInBackground(String... urlPath) {
-            StringRequest stringRequest = new StringRequest(Request.Method.POST, urlPath[0], new Response.Listener<String>() {
+        protected String doInBackground(String... String) {
+            StringRequest stringRequest = new StringRequest(Request.Method.POST,Config.BaseUrl + Config.get_order_fetch , new Response.Listener<String>() {
                 @Override
                 public void onResponse(String response) {
 
@@ -120,16 +97,16 @@ public class BuyerFragment extends android.support.v4.app.Fragment {
                                 order_fatch.setRemark(jsonProductObject.getString("remark"));
                                 order_fatch.setQualitiy(jsonProductObject.getString("qualitiy"));
                                 order_fatch.setPaymentterms(jsonProductObject.getString("paymentterms"));
-                               // order_fatch.setArea1(jsonProductObject.getString("area1"));
+
                                 list.add(order_fatch);
                             }
 
-                            buyerListAdeptor = new BuyerListAdeptor(getContext(), list);
+                            homeAdeptor = new HomeAdeptor(getContext(), list);
                             RecyclerViewDeatailItem.setHasFixedSize(true);
                             RecyclerViewDeatailItem.setLayoutManager(linearLayoutManager);
 
-                            RecyclerViewDeatailItem.setAdapter(buyerListAdeptor);
-                            buyerListAdeptor.notifyDataSetChanged();
+                            RecyclerViewDeatailItem.setAdapter(homeAdeptor);
+                            homeAdeptor.notifyDataSetChanged();
 
 
                             pg.dismiss();

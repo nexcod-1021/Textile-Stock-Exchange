@@ -1,24 +1,22 @@
 package com.tse.app.Activity;
 
+import android.app.ActionBar;
 import android.app.ProgressDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.database.Cursor;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.os.AsyncTask;
 import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomSheetBehavior;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ArrayAdapter;
+import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -31,18 +29,15 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.tse.app.Config;
-import com.tse.app.Fragment.EditProfileProfileFragment;
 import com.tse.app.R;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class BuyerDetailActivity extends AppCompatActivity {
+public class HomeDetailActivity extends AppCompatActivity {
 
     private BottomSheetBehavior sheetBehavior;
     LinearLayout linearLayout;
@@ -60,7 +55,9 @@ public class BuyerDetailActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_buyer_detail);
-        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(BuyerDetailActivity.this);
+        ActionBar.LayoutParams p = new ActionBar.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+        p.gravity = Gravity.CENTER;
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(HomeDetailActivity.this);
         findViewBy_Id();
         intent = getIntent();
         TxtOrderDeatailCode.setText(intent.getStringExtra("ordercode"));
@@ -194,7 +191,7 @@ public class BuyerDetailActivity extends AppCompatActivity {
 
         @Override
         protected void onPreExecute() {
-            pg = new ProgressDialog(BuyerDetailActivity.this);
+            pg = new ProgressDialog(HomeDetailActivity.this);
             pg.setTitle("Authentication...");
             pg.setMessage(Config.LoadingMsg);
             pg.show();
@@ -213,6 +210,7 @@ public class BuyerDetailActivity extends AppCompatActivity {
 
                                 if (j.getString("STATUS").equalsIgnoreCase("true")) {
 
+                                    Toast.makeText(HomeDetailActivity.this, "Offer is inserted", Toast.LENGTH_SHORT).show();
 
 
 
@@ -260,7 +258,7 @@ public class BuyerDetailActivity extends AppCompatActivity {
 
         @Override
         protected void onPreExecute() {
-            pg1 = new ProgressDialog(BuyerDetailActivity.this);
+            pg1 = new ProgressDialog(HomeDetailActivity.this);
             pg1.setTitle("Authentication...");
             pg1.setMessage(Config.LoadingMsg);
             pg1.show();
@@ -278,6 +276,7 @@ public class BuyerDetailActivity extends AppCompatActivity {
                                 JSONObject j = new JSONObject(response.trim());
 
                                 if (j.getString("STATUS").equalsIgnoreCase("true")) {
+                                    Toast.makeText(HomeDetailActivity.this, "Offer is inserted", Toast.LENGTH_SHORT).show();
 
 
                                     pg1.dismiss();

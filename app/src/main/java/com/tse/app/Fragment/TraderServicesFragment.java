@@ -4,6 +4,7 @@ package com.tse.app.Fragment;
 import android.app.ProgressDialog;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -17,6 +18,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.tse.app.Adapter.HomeAdeptor;
+import com.tse.app.Adapter.TraderHistoryAdeptor;
 import com.tse.app.Config;
 import com.tse.app.Model.Order_Fatch;
 import com.tse.app.R;
@@ -29,15 +31,17 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * A simple {@link Fragment} subclass.
+ */
+public class TraderServicesFragment extends android.support.v4.app.Fragment {
 
-public class ServicesFragment extends android.support.v4.app.Fragment {
     RecyclerView RecyclerViewDeatailItem;
     private LinearLayoutManager linearLayoutManager;
     private ArrayList<Order_Fatch> list;
-    private HomeAdeptor homeAdeptor;
+    private TraderHistoryAdeptor traderHistoryAdeptor;
     ProgressDialog pg;
-
-    public ServicesFragment() {
+    public TraderServicesFragment() {
         // Required empty public constructor
     }
 
@@ -46,20 +50,14 @@ public class ServicesFragment extends android.support.v4.app.Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_services, container, false);
-        RecyclerViewDeatailItem = view.findViewById(R.id.RvServiceDeatailItem);
+        View view = inflater.inflate(R.layout.fragment_trader_services, container, false);
+        RecyclerViewDeatailItem = view.findViewById(R.id.RvTraderServicesDeatailItem);
         linearLayoutManager = new LinearLayoutManager(getContext());
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-
-
-
-            new ServicesDetail_Item().execute();
-
-
-
+        new TraderServicesDetail_Item().execute();
         return view;
     }
-    private class ServicesDetail_Item extends AsyncTask<String, Void, String> {
+    private class TraderServicesDetail_Item extends AsyncTask<String, Void, String> {
         @Override
         protected void onPreExecute() {
             pg = new ProgressDialog(getContext());
@@ -70,8 +68,8 @@ public class ServicesFragment extends android.support.v4.app.Fragment {
         }
 
         @Override
-        protected String doInBackground(String... urlPath) {
-            StringRequest stringRequest = new StringRequest(Request.Method.POST,Config.BaseUrl + Config.get_order_fetch , new Response.Listener<String>() {
+        protected String doInBackground(String... String) {
+            StringRequest stringRequest = new StringRequest(Request.Method.POST,Config.BaseUrl + Config.trade_history , new Response.Listener<String>() {
                 @Override
                 public void onResponse(String response) {
 
@@ -98,17 +96,16 @@ public class ServicesFragment extends android.support.v4.app.Fragment {
                                 order_fatch.setRemark(jsonProductObject.getString("remark"));
                                 order_fatch.setQualitiy(jsonProductObject.getString("qualitiy"));
                                 order_fatch.setPaymentterms(jsonProductObject.getString("paymentterms"));
-                              //  order_fatch.setArea1(jsonProductObject.getString("area1"));
+
                                 list.add(order_fatch);
                             }
 
-                            homeAdeptor = new HomeAdeptor(getContext(), list);
+                            traderHistoryAdeptor = new TraderHistoryAdeptor(getContext(), list);
                             RecyclerViewDeatailItem.setHasFixedSize(true);
                             RecyclerViewDeatailItem.setLayoutManager(linearLayoutManager);
 
-                            RecyclerViewDeatailItem.setAdapter(homeAdeptor);
-                            homeAdeptor.notifyDataSetChanged();
-
+                            RecyclerViewDeatailItem.setAdapter(traderHistoryAdeptor);
+                            traderHistoryAdeptor.notifyDataSetChanged();
 
 
                             pg.dismiss();
@@ -132,8 +129,8 @@ public class ServicesFragment extends android.support.v4.app.Fragment {
                 @Override
                 protected Map<String, String> getParams() {
                     Map<String, String> map = new HashMap<String, String>();
-                    map.put("user_id","TSEM00074");
-                    map.put("type","3");
+                    map.put("user_id", "TSET00044");
+                    map.put("type", "3");
 
                     return map;
                 }
@@ -151,4 +148,5 @@ public class ServicesFragment extends android.support.v4.app.Fragment {
             super.onPostExecute(s);
         }
     }
+
 }

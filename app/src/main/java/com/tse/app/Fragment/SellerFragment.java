@@ -16,7 +16,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.tse.app.Adapter.BuyerListAdeptor;
+import com.tse.app.Adapter.HomeAdeptor;
 import com.tse.app.Config;
 import com.tse.app.Model.Order_Fatch;
 import com.tse.app.R;
@@ -34,7 +34,7 @@ public class SellerFragment extends android.support.v4.app.Fragment {
     RecyclerView RecyclerViewDeatailItem;
     private LinearLayoutManager linearLayoutManager;
     private ArrayList<Order_Fatch> list;
-    private BuyerListAdeptor buyerListAdeptor;
+    private HomeAdeptor homeAdeptor;
     ProgressDialog pg;
 
     public SellerFragment() {
@@ -51,13 +51,8 @@ public class SellerFragment extends android.support.v4.app.Fragment {
         linearLayoutManager = new LinearLayoutManager(getContext());
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
 
-        if (getArguments().getInt("flag") == 0) {
-            new SellerDetail_Item().execute(Config.BaseUrl + Config.get_order_fetch);
-        } else {
-            new SellerDetail_Item().execute(Config.BaseUrl + Config.trade_history_offer);
 
-        }
-
+        new SellerDetail_Item().execute();
         return view;
     }  private class SellerDetail_Item extends AsyncTask<String, Void, String> {
         @Override
@@ -71,7 +66,7 @@ public class SellerFragment extends android.support.v4.app.Fragment {
 
         @Override
         protected String doInBackground(String... urlPath) {
-            StringRequest stringRequest = new StringRequest(Request.Method.POST, urlPath[0], new Response.Listener<String>() {
+            StringRequest stringRequest = new StringRequest(Request.Method.POST,Config.BaseUrl + Config.get_order_fetch , new Response.Listener<String>() {
                 @Override
                 public void onResponse(String response) {
 
@@ -103,12 +98,12 @@ public class SellerFragment extends android.support.v4.app.Fragment {
                                 list.add(order_fatch);
                             }
 
-                            buyerListAdeptor = new BuyerListAdeptor(getContext(), list);
+                            homeAdeptor = new HomeAdeptor(getContext(), list);
                             RecyclerViewDeatailItem.setHasFixedSize(true);
                             RecyclerViewDeatailItem.setLayoutManager(linearLayoutManager);
 
-                            RecyclerViewDeatailItem.setAdapter(buyerListAdeptor);
-                            buyerListAdeptor.notifyDataSetChanged();
+                            RecyclerViewDeatailItem.setAdapter(homeAdeptor);
+                            homeAdeptor.notifyDataSetChanged();
 
 
 

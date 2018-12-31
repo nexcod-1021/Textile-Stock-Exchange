@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="5dp"
+    android:padding="5dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/card_bg"
+        android:orientation="vertical"
+        android:padding="20dp">
+
+        <LinearLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/style_textview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:text="Status -"
+                android:textColor="@color/colorsigleline"
+                android:textSize="14sp" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_gravity="bottom"
+                android:orientation="vertical"
+                android:paddingLeft="10dp">
+
+                <TextView
+                    android:id="@+id/TxtOrderStatus"
+                    style="@style/style_textview"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:fontFamily="@font/semibold"
+                    android:textSize="14sp" />
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/btnViewDetail"
+                android:layout_width="wrap_content"
+                android:layout_height="35dp"
+                android:background="@drawable/button_background"
+                android:fontFamily="@font/semibold"
+                android:padding="0dp"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:text="View Detail"
+                android:textAllCaps="false"
+                android:textColor="@color/colorwhite"
+                android:textSize="14sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="7dp"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/style_textview"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="Code -"
+                android:textColor="@color/colorsigleline"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/TxtOrderCode"
+                style="@style/style_textview"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:fontFamily="@font/semibold"
+                android:paddingLeft="10dp"
+                android:textSize="14sp" />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="7dp"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/style_textview"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="Product Name -"
+                android:textColor="@color/colorsigleline"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/TxtOrderProduct"
+                style="@style/style_textview"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:fontFamily="@font/semibold"
+                android:paddingLeft="10dp"
+                android:textSize="14sp" />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="7dp"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/style_textview"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="Category -"
+                android:textColor="@color/colorsigleline"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/TxtOrderCategory"
+                style="@style/style_textview"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:fontFamily="@font/semibold"
+                android:paddingLeft="10dp"
+                android:textSize="14sp" />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="7dp"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/style_textview"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="Sub Category -"
+                android:textColor="@color/colorsigleline"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/TxtOrderSubCategory"
+                style="@style/style_textview"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:fontFamily="@font/semibold"
+                android:paddingLeft="10dp"
+                android:textSize="14sp" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+</android.support.v7.widget.CardView>

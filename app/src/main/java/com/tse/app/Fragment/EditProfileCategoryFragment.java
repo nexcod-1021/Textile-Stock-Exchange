@@ -2,7 +2,6 @@ package com.tse.app.Fragment;
 
 
 import android.app.ProgressDialog;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -31,12 +30,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.tse.app.Activity.EditProfileActivity;
-import com.tse.app.Activity.MobileRegisterActivity;
-import com.tse.app.Activity.VerifyOTPActivity;
-import com.tse.app.Adapter.BuyerListAdeptor;
 import com.tse.app.Config;
-import com.tse.app.Model.Order_Fatch;
 import com.tse.app.R;
 
 import org.json.JSONArray;
@@ -47,7 +41,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class EditProfileCategoryFragment extends android.support.v4.app.Fragment {
+public class
+EditProfileCategoryFragment extends android.support.v4.app.Fragment {
     Spinner spProfileSelect_Category, spProfileMeters;
     EditText edProfileSub_Category, edProfileQuantity;
     SharedPreferences sharedPreferences;

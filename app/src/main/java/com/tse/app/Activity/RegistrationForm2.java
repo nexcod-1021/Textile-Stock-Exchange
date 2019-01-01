@@ -49,6 +49,7 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -57,7 +58,7 @@ public class RegistrationForm2 extends AppCompatActivity {
     AutoCompleteTextView autoRegisterArea1, autoRegisterArea2;
     EditText edRegisterAddress1, edRegisterPincode1, edRegisterAddress2,
             edRegisterPincode2, edRegisterContactNo1, edRegisterContactNo2,
-            edRegisterSubCategory, edRegisterQuantity, edRegisterReferralCode,edRegistrationcashbak,edRegistrationStartdate,edRegistrationEnddate;
+            edRegisterSubCategory, edRegisterQuantity, edRegisterReferralCode;
     RadioButton rbRegisterGeneral, rbRegisterPrime;
     ProgressDialog pg, pg2, pg3,pg4;
     SharedPreferences sharedPreferences;
@@ -65,9 +66,10 @@ public class RegistrationForm2 extends AppCompatActivity {
     private ArrayList<String> cat_name_list;
     private ArrayList<String> qty_type_list;
     private ArrayList<String> fetch_area_list;
+    String dateString;
 
     long totalSize = 0;
-    private int day, month, year;
+    String StartDate;
     ProgressDialog dialog;
     private int PICK_PDF_REQUEST = 1;
     private static final String TAG = EditProfileActivity.class.getSimpleName();
@@ -136,48 +138,15 @@ public class RegistrationForm2 extends AppCompatActivity {
 
             }
         });
-        Calendar cc = Calendar.getInstance();
-        year = cc.get(Calendar.YEAR);
-        month = cc.get(Calendar.MONTH);
-        day = cc.get(Calendar.DAY_OF_MONTH);
-        edRegistrationStartdate.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                final DatePickerDialog datePickerDialog = new DatePickerDialog(RegistrationForm2.this, new DatePickerDialog.OnDateSetListener() {
-                    @Override
-                    public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-                        Calendar calendar = Calendar.getInstance();
-                        calendar.set(year, monthOfYear, dayOfMonth);
 
-                        SimpleDateFormat dm = new SimpleDateFormat("dd/mm/yyyy");
-                        String dateString = dm.format(calendar.getTime());
-                        edRegistrationStartdate.setText(dateString);
-                    }
-                }, year, month, day);
-                datePickerDialog.show();
 
-            }
 
-        });
-        edRegistrationEnddate.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                final DatePickerDialog datePickerDialog = new DatePickerDialog(RegistrationForm2.this, new DatePickerDialog.OnDateSetListener() {
-                    @Override
-                    public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-                        Calendar calendar = Calendar.getInstance();
-                        calendar.set(year, monthOfYear, dayOfMonth);
+        Date c = Calendar.getInstance().getTime();
+        SimpleDateFormat df = new SimpleDateFormat("dd/mm/yyyy");
+         StartDate = df.format(c);
 
-                        SimpleDateFormat dm = new SimpleDateFormat("dd/mm/yyyy");
-                        String dateString = dm.format(calendar.getTime());
-                        edRegistrationEnddate.setText(dateString);
-                    }
-                }, year, month, day);
-                datePickerDialog.show();
 
-            }
 
-        });
 
     }
 
@@ -197,9 +166,7 @@ public class RegistrationForm2 extends AppCompatActivity {
         edRegisterSubCategory = (EditText) findViewById(R.id.edRegistrationSubCategory);
         edRegisterQuantity = (EditText) findViewById(R.id.edRegistrationQuantity);
         edRegisterReferralCode = (EditText) findViewById(R.id.edRegistrationReferralCode);
-        edRegistrationcashbak = (EditText) findViewById(R.id.edRegistrationcashbak);
-        edRegistrationStartdate = (EditText) findViewById(R.id.edRegistrationStartdate);
-        edRegistrationEnddate = (EditText) findViewById(R.id.edRegistrationEnddate);
+
 
     }
 
@@ -505,9 +472,8 @@ public class RegistrationForm2 extends AppCompatActivity {
                 entity.addPart(Config.Membership, new StringBody(MemberType.toLowerCase()));
                 entity.addPart(Config.Refferalcode, new StringBody(edRegisterReferralCode.getText().toString()));
                 entity.addPart(Config.password, new StringBody(getIntent().getExtras().getString(Config.password)));
-                entity.addPart(Config.cashbak, new StringBody(edRegistrationcashbak.getText().toString()));
-                entity.addPart(Config.startdate, new StringBody(edRegistrationStartdate.getText().toString()));
-                entity.addPart(Config.enddate, new StringBody(edRegistrationEnddate.getText().toString()));
+                entity.addPart(Config.startdate, new StringBody(StartDate));
+
                 entity.addPart(Config.user, new StringBody(getIntent().getExtras().getString(Config.UserType)));
 
 

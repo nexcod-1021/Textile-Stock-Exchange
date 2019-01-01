@@ -66,7 +66,7 @@ public class Config {
     public static String Refferalcode = "Refferalcode";
     public static String password = "password";
     public static String cashbak = "cashbak";
-    public static String startdate = "startdate";
+    public static String startdate = "start_date";
     public static String enddate = "enddate";
     public static String profileimage = "profileimage";
 

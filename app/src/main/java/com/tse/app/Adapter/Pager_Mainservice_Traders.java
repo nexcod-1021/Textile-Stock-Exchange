@@ -32,7 +32,7 @@ public class Pager_Mainservice_Traders extends FragmentStatePagerAdapter {
     @Override
     public Fragment getItem(int position) {
         //Returning the current tabs
-        Bundle bundle = new Bundle();
+
 
         switch (position) {
             case 0:

@@ -1,5 +1,6 @@
 package com.tse.app.Activity;
 
+import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -12,6 +13,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.Spinner;
@@ -44,7 +46,9 @@ import org.json.JSONObject;
 
 import java.io.File;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -53,7 +57,7 @@ public class RegistrationForm2 extends AppCompatActivity {
     AutoCompleteTextView autoRegisterArea1, autoRegisterArea2;
     EditText edRegisterAddress1, edRegisterPincode1, edRegisterAddress2,
             edRegisterPincode2, edRegisterContactNo1, edRegisterContactNo2,
-            edRegisterSubCategory, edRegisterQuantity, edRegisterReferralCode;
+            edRegisterSubCategory, edRegisterQuantity, edRegisterReferralCode,edRegistrationcashbak,edRegistrationStartdate,edRegistrationEnddate;
     RadioButton rbRegisterGeneral, rbRegisterPrime;
     ProgressDialog pg, pg2, pg3,pg4;
     SharedPreferences sharedPreferences;
@@ -63,7 +67,7 @@ public class RegistrationForm2 extends AppCompatActivity {
     private ArrayList<String> fetch_area_list;
 
     long totalSize = 0;
-
+    private int day, month, year;
     ProgressDialog dialog;
     private int PICK_PDF_REQUEST = 1;
     private static final String TAG = EditProfileActivity.class.getSimpleName();
@@ -82,6 +86,7 @@ public class RegistrationForm2 extends AppCompatActivity {
 
         //  edRegisterContactNo1.setText(getIntent().getExtras().getString(Config.Contact1));
         edRegisterContactNo1.setEnabled(false);
+        edRegisterContactNo1.setText(sharedPreferences.getString(Config.contactnumber1,""));
 
         // selectedFilePath = getIntent().getExtras().getString(Config.profileUrl);
 
@@ -131,6 +136,48 @@ public class RegistrationForm2 extends AppCompatActivity {
 
             }
         });
+        Calendar cc = Calendar.getInstance();
+        year = cc.get(Calendar.YEAR);
+        month = cc.get(Calendar.MONTH);
+        day = cc.get(Calendar.DAY_OF_MONTH);
+        edRegistrationStartdate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final DatePickerDialog datePickerDialog = new DatePickerDialog(RegistrationForm2.this, new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                        Calendar calendar = Calendar.getInstance();
+                        calendar.set(year, monthOfYear, dayOfMonth);
+
+                        SimpleDateFormat dm = new SimpleDateFormat("dd/mm/yyyy");
+                        String dateString = dm.format(calendar.getTime());
+                        edRegistrationStartdate.setText(dateString);
+                    }
+                }, year, month, day);
+                datePickerDialog.show();
+
+            }
+
+        });
+        edRegistrationEnddate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final DatePickerDialog datePickerDialog = new DatePickerDialog(RegistrationForm2.this, new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                        Calendar calendar = Calendar.getInstance();
+                        calendar.set(year, monthOfYear, dayOfMonth);
+
+                        SimpleDateFormat dm = new SimpleDateFormat("dd/mm/yyyy");
+                        String dateString = dm.format(calendar.getTime());
+                        edRegistrationEnddate.setText(dateString);
+                    }
+                }, year, month, day);
+                datePickerDialog.show();
+
+            }
+
+        });
 
     }
 
@@ -150,6 +197,9 @@ public class RegistrationForm2 extends AppCompatActivity {
         edRegisterSubCategory = (EditText) findViewById(R.id.edRegistrationSubCategory);
         edRegisterQuantity = (EditText) findViewById(R.id.edRegistrationQuantity);
         edRegisterReferralCode = (EditText) findViewById(R.id.edRegistrationReferralCode);
+        edRegistrationcashbak = (EditText) findViewById(R.id.edRegistrationcashbak);
+        edRegistrationStartdate = (EditText) findViewById(R.id.edRegistrationStartdate);
+        edRegistrationEnddate = (EditText) findViewById(R.id.edRegistrationEnddate);
 
     }
 
@@ -434,7 +484,7 @@ public class RegistrationForm2 extends AppCompatActivity {
                     entity.addPart(Config.profileimage, new FileBody(sourceFile));
                 }
 
-                entity.addPart(Config.user, new StringBody(getIntent().getExtras().getString(Config.UserType)));
+
                 entity.addPart(Config.name, new StringBody(getIntent().getExtras().getString(Config.fName)));
                 entity.addPart(Config.surname, new StringBody(getIntent().getExtras().getString(Config.lName)));
                 entity.addPart(Config.Name_of_enterprise, new StringBody(getIntent().getExtras().getString(Config.nameOfEnterprice)));
@@ -453,8 +503,13 @@ public class RegistrationForm2 extends AppCompatActivity {
                 entity.addPart(Config.subcategory, new StringBody(edRegisterSubCategory.getText().toString()));
                 entity.addPart(Config.qty, new StringBody(edRegisterQuantity.getText().toString() + " " + spRegisterMeters.getSelectedItem().toString()));
                 entity.addPart(Config.Membership, new StringBody(MemberType.toLowerCase()));
-                entity.addPart(Config.password, new StringBody(getIntent().getExtras().getString(Config.password)));
                 entity.addPart(Config.Refferalcode, new StringBody(edRegisterReferralCode.getText().toString()));
+                entity.addPart(Config.password, new StringBody(getIntent().getExtras().getString(Config.password)));
+                entity.addPart(Config.cashbak, new StringBody(edRegistrationcashbak.getText().toString()));
+                entity.addPart(Config.startdate, new StringBody(edRegistrationStartdate.getText().toString()));
+                entity.addPart(Config.enddate, new StringBody(edRegistrationEnddate.getText().toString()));
+                entity.addPart(Config.user, new StringBody(getIntent().getExtras().getString(Config.UserType)));
+
 
 
                 totalSize = entity.getContentLength();

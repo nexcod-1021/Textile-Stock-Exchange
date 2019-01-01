@@ -89,8 +89,10 @@ public class MobileRegisterActivity extends AppCompatActivity {
                                 System.out.println("Exist mobile :" + response.trim());
                                 if (j.getString("STATUS").equalsIgnoreCase("true")) {
                                     Intent intent  = new Intent(getApplicationContext(),VerifyOTPActivity.class);
+                                    editor.putString(Config.contactnumber1,  edMobileNumber.getText().toString());
                                     intent.putExtra("mobile", edMobileNumber.getText().toString());
                                     intent.putExtra("code", String.valueOf(j.getString(Config.response)));
+                                    editor.commit();
                                     startActivity(intent);
                                     pg.dismiss();
                                 } else {

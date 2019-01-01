@@ -23,6 +23,8 @@ public class Config {
     public static final String addsubcategory = "addsubcategory";
     public static final String trade_history_offer = "trade_history_offer";
     public static final String trade_history = "trade_history";
+    public static final String fetchsubcategory = "fetchsubcategory";
+    public static final String deletesubcat = "deletesubcat";
 
     public static String spPriceGeneral = "spPriceGeneral";
     public static String spPricePrime = "spPricePrime";
@@ -63,6 +65,9 @@ public class Config {
     public static String Membership = "Membership";
     public static String Refferalcode = "Refferalcode";
     public static String password = "password";
+    public static String cashbak = "cashbak";
+    public static String startdate = "startdate";
+    public static String enddate = "enddate";
     public static String profileimage = "profileimage";
 
     //login Response Data

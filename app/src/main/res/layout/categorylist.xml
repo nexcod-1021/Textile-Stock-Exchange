@@ -23,6 +23,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Category -"
+                android:layout_gravity="bottom"
                 android:textColor="@color/colorsigleline"
                 android:textSize="14sp" />
 
@@ -34,8 +35,20 @@
                 android:layout_weight="1"
                 android:fontFamily="@font/semibold"
                 android:paddingLeft="10dp"
-                android:text="Print Saree"
+                android:layout_gravity="bottom"
+
                 android:textSize="14sp" />
+            <ImageButton
+                android:id="@+id/btnEditCategory"
+                android:layout_width="wrap_content"
+                android:layout_height="35dp"
+                android:src="@drawable/add"
+                android:layout_marginLeft="5dp"/>
+            <ImageButton
+                android:id="@+id/btnDeleteCategory"
+                android:layout_width="wrap_content"
+                android:layout_height="35dp"
+                android:src="@drawable/close" />
 
 
         </LinearLayout>
@@ -61,7 +74,7 @@
                 android:layout_weight="1"
                 android:fontFamily="@font/semibold"
                 android:paddingLeft="10dp"
-                android:text="Print Saree"
+
                 android:textSize="14sp" />
 
 
@@ -88,7 +101,30 @@
                 android:layout_weight="1"
                 android:fontFamily="@font/semibold"
                 android:paddingLeft="10dp"
-                android:text="Print Saree"
+
+                android:textSize="14sp" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/style_textview"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="Quentity -"
+                android:textColor="@color/colorsigleline"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/TxtProfileproductname"
+                style="@style/style_textview"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:fontFamily="@font/semibold"
+                android:paddingLeft="10dp"
                 android:textSize="14sp" />
         </LinearLayout>
 

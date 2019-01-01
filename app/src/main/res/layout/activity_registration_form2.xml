@@ -164,6 +164,39 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="0dp"
             android:hint="Referral Code" />
+        <EditText
+            android:id="@+id/edRegistrationcashbak"
+            style="@style/style_edittext"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="0dp"
+            android:hint="cashbak" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/edRegistrationStartdate"
+                style="@style/style_edittext"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="0dp"
+                android:layout_weight="1"
+                android:drawableRight="@drawable/ic_date"
+                android:paddingRight="5dp"
+                android:hint="Start Date" />
+            <EditText
+                android:id="@+id/edRegistrationEnddate"
+                style="@style/style_edittext"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableRight="@drawable/ic_date"
+                android:layout_marginTop="0dp"
+                android:layout_weight="1"
+                android:hint="Start Date" />
+
+        </LinearLayout>
 
 
         <LinearLayout
